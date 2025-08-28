@@ -1,0 +1,36 @@
+.mainContainer{
+    background-color: #2a2a2a;
+}
+.imageContainer{
+    left: 0;
+    right: 0;
+    top: 0;
+}
+.backgroundImage{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.closeButton{
+    background-color: #33333399;
+    border: 2px solid #ffffff42;
+}
+.closeButton:hover{
+    
+}
+.loader{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: 0.3s;
+    animation: loader-animation 2s linear 0s infinite;
+}
+@keyframes loader-animation {
+    0%,100%{
+        opacity: 1;
+    }
+    50%{
+        opacity: 0.5;
+    }
+}
