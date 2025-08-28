@@ -24,7 +24,7 @@ export default function HeroSection() {
   return (
     <section className="relative w-full h-[400px] flex items-center justify-center">
       {/* Hero content here */}
-      <Link href="/movie/2">
+      <Link href="/movie/1">
       <Image
         src={getButtonSrc()}
         alt="Play Now"
