@@ -182,6 +182,8 @@ export default function MovieModal({ params }: { params: { id: string } }) {
               />
             </div>
           </div>
+        </>
+      }
           <div className={`${styles.noScrollbar} mb-4 sm:w-[20rem] w-[15rem] sm:h-[20rem] h-[10rem] grid grid-cols-2 gap-x-[1.5rem] sm:gap-y-[1.5rem] gap-y-[1rem] mx-auto bg-[#0D0D0D99] py-[1rem] sm:px-[0.8rem] px-[1.5rem] rounded-[30px] overflow-auto`}>
             {seasons.map((season, index) => (
               <CustomButton
@@ -193,8 +195,6 @@ export default function MovieModal({ params }: { params: { id: string } }) {
 
             ))}
           </div>
-        </>
-      }
 
       {/* recommended section  */}
       <div className="my-4">
