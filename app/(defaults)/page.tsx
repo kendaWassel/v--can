@@ -3,7 +3,6 @@ import Footer from '@/components/layouts/footer';
 import Header from '@/components/layouts/header';
 import React from 'react';
 import CategorySlider from '@/components/slider/Slider';
-import GradientSvgButton from '@/components/custom/HeroButton';
 import GradientButton from '@/components/custom/HeroButton';
 import { Box } from '@mui/material';
 import MobileTabletHeader from '@/components/TabAndMobHeader/header';
@@ -196,15 +195,3 @@ export default function HomePage() {
   </div>
   );
 }
-
-
-
-
-
-/**
- * <div className="absolute bottom-6 left-6 font-cairo font-bold text-[24px] text-[#FFFFFF] pl-12"
-       
-        >
-        Category (Trend - New - Continue watching)
-        </div>
- */

@@ -1,9 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Link from 'next/link';
 import Image from "next/image";
-
+import Link from "next/link";
 export default function HeroSection() {
   const [buttonState, setButtonState] = useState<"normal" | "hover" | "clicked">("normal");
 
@@ -24,7 +23,7 @@ export default function HeroSection() {
   return (
     <section className="relative w-full h-[400px] flex items-center justify-center">
       {/* Hero content here */}
-      <Link href="/movie/1">
+      <Link href="/movie/2">
       <Image
         src={getButtonSrc()}
         alt="Play Now"

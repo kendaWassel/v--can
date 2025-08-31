@@ -12,57 +12,60 @@ import movie5 from '@/public/assets/images/movies/m5.svg';
 import movie6 from '@/public/assets/images/movies/m6.svg';
 
 interface Movie {
-  src: any;
+  src: string;
   watched?: boolean;
   progress?: number;
-  
+  episode: number;
 }
 
-const movies: Movie[] = [
-  { src: movie1, progress: 0.5   }, // half watched
-  { src: movie2, watched: true, }, // fully watched
-  { src: movie3, progress: 0.2},
-  { src: movie4 ,  watched: true },
-  {src:movie5 ,  },
-  {src:movie6 , }
-];
+interface popUpSliderProps{
+  movies: Movie[];
+  index?: number;
+  onIndexChange?:(i: number) => void;
+}
 
 
 
-export default function CategorySliderNoSlick() {
+export default function PopUpSlider({ movies , index: controlledIndex, onIndexChange}: popUpSliderProps) {
   const SLIDE_W = 193; // px
   const GAP = 0; // px
   const VISIBLE_SLIDES = 1;
-  const SIDE_PADDING = 300; // left/right padding to avoid fades overlapping content
+  const SIDE_PADDING = 150; // left/right padding to avoid fades overlapping content
 
-  const [index, setIndex] = useState(0);
+  const [internalIndex, setInternalIndex] = useState(0);
   const maxIndex = Math.max(0, movies.length - VISIBLE_SLIDES);
 
+  // if parent controls index, use it, otherwise fallback to internal
+  const index = controlledIndex ?? internalIndex;
+
   useEffect(() => {
-    setIndex((i) => Math.min(i, maxIndex));
-  }, [maxIndex]);
+    if (controlledIndex !== undefined) {
+      setInternalIndex(controlledIndex);
+    }
+  }, [controlledIndex]);
 
   const handlePrev = () => {
-    setIndex((i) => Math.max(i - 1, 0));
+    const newIndex = Math.max(index - 1, 0);
+    setInternalIndex(newIndex);
+    onIndexChange?.(newIndex);
   };
 
   const handleNext = () => {
-    setIndex((i) => Math.min(i + 1, maxIndex));
+    const newIndex = Math.min(index + 1, maxIndex);
+    setInternalIndex(newIndex);
+    onIndexChange?.(newIndex);
   };
 
   return (
     <Box
       sx={{
         width:"100%",
-        height: 351,
+        height: 200,
         position: "relative",
-        overflow: "hidden",
-        backgroundColor: "#0A0C0F", // dark background behind slider + fades
+        // overflow: "hidden",
+        backgroundColor: "#2b2b2b", // dark background behind slider + fades
       }}
     >
-      <Typography sx={{ mb: 2, color: "#fff", fontWeight: "bold", pl: 6, pb:4}}>
-        
-      </Typography>
 
       {/* Left arrow */}
       <IconButton
@@ -71,12 +74,15 @@ export default function CategorySliderNoSlick() {
         aria-label="previous"
         sx={{
           position: "absolute",
-          left: 30,
+          left: 0,
+          width: {
+            xs: '90px',
+            sm: 'auto'
+          },
           top: "50%",
           transform: "translateY(-50%)",
           zIndex: 60,
           pointerEvents: "auto",
-          
           opacity: index === 0 ? 0.45 : 1,
         }}
       >
@@ -90,7 +96,14 @@ export default function CategorySliderNoSlick() {
         aria-label="next"
         sx={{
           position: "absolute",
-          right: 45,
+          right: {
+            xs: '0',
+            md: '30px',
+          },
+          width: {
+            xs: '90px',
+            sm: 'auto'
+          },
           top: "50%",
           transform: "translateY(-50%)",
           zIndex: 60,
@@ -106,12 +119,14 @@ export default function CategorySliderNoSlick() {
        position: "absolute",
        left: 0,
        top: 0,               // fade aligned to top of slider viewport (or movie image top)
-       width: SIDE_PADDING,  // same as padding on slider viewport, 180 is good
-       height: 351,          // match movie image height
-       background: 'linear-gradient(to right, #0A0C0F 40%, rgba(11, 13, 16, 0) 100%)',
-       zIndex: 3,
+       width: {
+        xs: `calc(${SIDE_PADDING}px - 3rem)`,
+        md: SIDE_PADDING,
+       },  // same as padding on slider viewport, 180 is good
+       height: 240,          // match movie image height
+       background: 'linear-gradient(to right, #1a1a1a 40%, #0B0D1000)',
+       zIndex: 5,
        pointerEvents: "none",
-       opacity: index === 0 ? 0 : 1,
        transition: 'opacity 200ms ease',
        }}
        />
@@ -122,12 +137,14 @@ export default function CategorySliderNoSlick() {
         position: "absolute",
         right: 0,
         top: 0,               // same as left fade
-        width: SIDE_PADDING,  // same width, 180 px
-        height: 351,          // match movie image heigh
-        background: 'linear-gradient(to left, #0A0C0F 40%, rgba(11, 13, 16, 0) 100%)',
-        zIndex: 3,
+        width: {
+          xs: `calc(${SIDE_PADDING}px - 3rem)`,
+          md: SIDE_PADDING,
+         },  // same width, 180 px
+        height: 240,          // match movie image heigh
+        background: 'linear-gradient(to left, #1a1a1a 40%, #0B0D1000)',
+        zIndex: 5,
         pointerEvents: "none",
-        opacity: index === maxIndex ? 0 : 1,
         transition: 'opacity 200ms ease',
         }}
         />
@@ -136,11 +153,16 @@ export default function CategorySliderNoSlick() {
       <Box
         sx={{
           width: "100%",
-          height: 351,
-          overflow: "hidden",
-          paddingLeft: `${SIDE_PADDING}px`,
+          height: 200,
+          // overflow: "hidden",
+          paddingLeft: {
+            xs: '4.5rem',
+            md: `${SIDE_PADDING}px`,
+          },
           paddingRight: `${SIDE_PADDING}px`,
           boxSizing: "border-box", // important so padding doesn't reduce visible width
+          position: 'relative',
+          zIndex: 4
         }}
       >
         {/* Track */}
@@ -155,15 +177,15 @@ export default function CategorySliderNoSlick() {
             
           }}
         >
-          {movies.map((m, idx) => (
+          {movies.map((m) => (
            <Box
-            key={idx}
+            key={m.episode}
             sx={{
             minWidth: SLIDE_W,
             flexShrink: 0,
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
+            alignItems: "start",
             gap: 0.5, // space between image box and text
             }}
             >
@@ -184,7 +206,7 @@ export default function CategorySliderNoSlick() {
              overflow: "hidden",
             }}
              >
-            <Image src={m.src} alt={`movie-${idx}`} fill style={{ objectFit: "cover" }} />
+            <Image src={m.src} alt={`episode-${m.episode}`} fill style={{ objectFit: "cover" }} />
             {/* watched badge */}
        {m.watched && (
         <Box
@@ -225,16 +247,31 @@ export default function CategorySliderNoSlick() {
       )}
     </Box>
 
-  
+{/* Episode text */}
+<Typography
+      sx={{
+        position: 'absolute',
+        width:169,
+        bottom: '-2.5rem',
+        marginTop: "8px",
+        fontFamily: "Cairo, sans-serif",
+        fontWeight: 700,
+        fontSize: {
+          xs: '14px',
+          md: "24px"
+        },
+        color: "#fff",
+      }}
+    >
+      Episode {m.episode}
+    </Typography>  
   </Box>
+
 ))}
+
           
         </Box>
       </Box>
     </Box>
   );
 }
-/**
- * <Image src="/assets/images/ArrowRight.svg" alt="next" width={40} height={40} />
- * <Image src="/assets/images/ArrowLeft.svg" alt="prev" width={40} height={40} />
- */
