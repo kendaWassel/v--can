@@ -1,15 +1,16 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import React from "react";
 import styles from './CustomButton.module.css';
 
 interface CustomButtonProps {
-  label: string;
+  children: React.ReactNode;
   to: string;
   className?: string;
 }
 
-export default function CustomButton({ label, to, className }: CustomButtonProps) {
+export default function CustomButton({ children, to, className }: CustomButtonProps) {
   const router = useRouter();
 
   return (
@@ -17,7 +18,7 @@ export default function CustomButton({ label, to, className }: CustomButtonProps
       onClick={() => router.push(to)}
       className={`${styles.gradientButton} font-cairo font-bold text-white border-[2px] border-[#d2d2d214] font-bold ${className}`}
     >
-      {label}
+      {children}
     </button>
   );
 }

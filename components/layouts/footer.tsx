@@ -4,7 +4,7 @@ import Link from "next/link";
 const Footer = () => {
     return (
                <footer
-      className="w-full h-[351px] flex flex-col items-center justify-center"
+      className="w-full h-[351px]  md:h-[271px] flex flex-col items-center justify-center overflow-x-hidden"
       style={{
         background:'hsla(216, 19%, 5%, 1)',
         backgroundImage: `
@@ -25,41 +25,53 @@ const Footer = () => {
         <path d="M64.0664 25.9952C60.0293 25.9952 56.3182 24.1063 53.884 20.8146C53.0794 19.7264 53.3167 18.1913 54.4121 17.3927C54.8391 17.0823 55.3424 16.9168 55.8705 16.9168C56.6524 16.9168 57.395 17.2892 57.8591 17.9161C59.3547 19.9395 61.6198 21.0981 64.0684 21.0981C68.3592 21.0981 71.8496 17.6327 71.8496 13.3707C71.8496 9.10874 68.3592 5.64332 64.0684 5.64332C61.1433 5.64332 58.3893 7.19293 56.8813 9.68804L50.9134 19.5733C48.5205 23.5332 44.1492 25.9911 39.5015 25.9911C32.4919 25.9911 26.79 20.3284 26.79 13.3686C26.79 6.40881 32.4898 0.752411 39.4995 0.752411C43.5654 0.752411 47.2786 2.64546 49.6901 5.94331C50.4885 7.03569 50.243 8.56876 49.1435 9.36115C48.7185 9.66735 48.2193 9.82872 47.6974 9.82872C46.9094 9.82872 46.1626 9.45011 45.7005 8.8191C44.2276 6.80398 41.9667 5.64745 39.4995 5.64745C35.2087 5.64745 31.7183 9.11288 31.7183 13.3748C31.7183 17.6368 35.2087 21.1022 39.4995 21.1022C42.4246 21.1022 45.1786 19.5526 46.6866 17.0575L52.6504 7.17845C55.0454 3.21442 59.4187 0.75448 64.0664 0.75448C71.076 0.75448 76.7779 6.41709 76.7779 13.3769C76.7779 20.3367 71.076 25.9993 64.0664 25.9993V25.9952Z" fill="white"/>
         </svg>
 
-        <nav className="flex pt-12 gap-[20px]  items-center w-[453px] h-[37px]">
+        <nav className=" hidden md:flex  pt-12 gap-[20px]  items-center w-[453px]  h-[37px]">
 
       <Link
         href="/"
-        className=" w-[51px] h-[37px] text-[#FFFFFF] hover:text-gray-300 font-cairo   text-[16px] leading-none text-center"
+        className=" w-[51px] h-[37px]  relative text-[#FFFFFF] font-cairo text-[16px] leading-none text-center 
+               after:content-[''] after:absolute after:left-0 after:-bottom-0 after:w-0 after:h-[2px] after:bg-white 
+               hover:after:w-full after:transition-all after:duration-300"
       >
         Home
       </Link>
       <Link
-        href="/tvShows"
-        className="w-[82px] h-[37px]  text-[#FFFFFF] hover:text-gray-300  font-cairo  text-base leading-none text-center"
+        href="/tv-shows"
+        className="w-[82px] h-[37px]   relative text-[#FFFFFF] font-cairo text-[16px] leading-none text-center 
+               after:content-[''] after:absolute after:left-0 after:-bottom-0 after:w-0 after:h-[2px] after:bg-white 
+               hover:after:w-full after:transition-all after:duration-300"
       >
         Tv Shows
       </Link>
       <Link
         href="/movies"
-        className="w-[62px] h-[37px] text-[#FFFFFF] hover:text-gray-300 font-cairo  text-base leading-none text-center"
+        className="w-[62px] h-[37px]  relative text-[#FFFFFF] font-cairo text-[16px] leading-none text-center 
+               after:content-[''] after:absolute after:left-0 after:-bottom-0 after:w-0 after:h-[2px] after:bg-white 
+               hover:after:w-full after:transition-all after:duration-300"
       >
         Movies
       </Link>
       <Link
         href="/anime"
-        className="w-[55px] h-[37px] text-[#FFFFFF] hover:text-gray-300  font-cairo  text-base leading-none text-center"
+        className="w-[55px] h-[37px]  relative text-[#FFFFFF] font-cairo text-[16px] leading-none text-center 
+               after:content-[''] after:absolute after:left-0 after:-bottom-0 after:w-0 after:h-[2px] after:bg-white 
+               hover:after:w-full after:transition-all after:duration-300"
       >
         Anime
       </Link>
       <Link
         href="/new"
-        className=" w-[37px] h-[37px] text-white hover:text-gray-300  font-cairo  text-base leading-none text-center"
+        className=" w-[37px] h-[37px]  relative text-[#FFFFFF] font-cairo text-[16px] leading-none text-center 
+               after:content-[''] after:absolute after:left-0 after:-bottom-0 after:w-0 after:h-[2px] after:bg-white 
+               hover:after:w-full after:transition-all after:duration-300"
       >
         New
       </Link>
        <Link
-        href="/myList"
-        className=" w-[65px] h-[37px] text-white hover:text-gray-300 font-cairo  text-base leading-none text-center"
+        href="/my-list"
+        className=" w-[65px] h-[37px] relative text-[#FFFFFF] font-cairo text-[16px] leading-none text-center 
+               after:content-[''] after:absolute after:left-0 after:-bottom-0 after:w-0 after:h-[2px] after:bg-white 
+               hover:after:w-full after:transition-all after:duration-300"
       >
         My List
       </Link>

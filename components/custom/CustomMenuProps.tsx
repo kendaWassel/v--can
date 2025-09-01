@@ -1,23 +1,32 @@
 
 
 export const customMenuProps = {
+  disableScrollLock: true,
+  keepMounted: false,
   PaperProps: {
     sx: {
-       mt: '20px', // Add vertical gap between button and dropdown
-      width: '168px',
+      mt: {
+        xs: '6px',
+        sm: '20px'
+      },
+      width: {
+        xs: '90px',
+        sm: '168px'
+      },
       borderRadius: '24px',
       background: 'rgba(77, 77, 77, 0.6)',
       position: 'relative',
-      overflow: 'hidden', // ✅ Clip children (pseudo-element)
-      padding: '1px',     // ✅ Border thickness
+      overflow: 'hidden',
+      padding: '1px',
       backdropFilter: 'blur(5px)',
       boxSizing: 'border-box',
+      maxHeight: 'none',
       '&::before': {
         content: '""',
         position: 'absolute',
         inset: 0,
         borderRadius: '24px',
-        padding: '1px', // thickness of the border
+        padding: '1px',
         background: 'linear-gradient(0deg, rgba(0, 0, 0, 0.2), #666666)',
         WebkitMask:
           'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
@@ -26,17 +35,27 @@ export const customMenuProps = {
         pointerEvents: 'none',
         zIndex: 1,
       },
-       '& .MuiMenu-list': {
+      '& .MuiMenu-list': {
         position: 'relative',
         zIndex: 2,
-        padding: '16px 16px',  // Add enough padding
+        padding: {
+          xs: '3px 5px',
+          sm: '16px 16px'
+        },
         display: 'grid',
         gridTemplateColumns: '1fr 1fr',
-        rowGap: '24px',
-        columnGap: '36px',
+        rowGap: {
+          xs: '3px',
+          sm: '24px'
+        },
+        columnGap: {
+          xs: '10px',
+          sm: '36px'
+        },
         background: 'rgba(77, 77, 77, 0.6)',
         borderRadius: '22px',
         boxSizing: 'border-box',
+        maxHeight: 'none',
       },
     },
   },

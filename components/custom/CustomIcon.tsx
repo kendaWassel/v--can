@@ -6,10 +6,22 @@ export const CustomIcon = (props: any) => {
   return (
     <Box
       sx={{
-        width: '25px',   // Control Icon Size here
-        height: '25px',
-        paddingLeft: '10px',  // Control Padding here
-        paddingBottom:"3px",
+        width: {
+          xs: '12px',
+          sm: '18px'
+        },
+        height: {
+          xs: '12px',
+          sm: '18px'
+        },
+        paddingLeft: {
+          xs: '4px',
+          sm: '8px'
+        },
+        paddingBottom: {
+          xs: '1px',
+          sm: '2px'
+        },
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

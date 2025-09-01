@@ -71,6 +71,13 @@ export default function MovieModal({ params }: { params: { id: string } }) {
       document.body.style.overflow = "auto";
     };
   }, []);
+  useEffect(() => {
+    const header = document.querySelector("header");
+    if (header) header.style.display = "none";   // hide header
+    return () => {
+      if (header) header.style.display = "flex"; // restore header
+    };
+  }, []);
 
   return (
     <div className={`${styles.mainContainer} font-cairo fixed inset-0 z-[60] overflow-y-auto w-full h-full bg-[#2a2a2a]`}>
@@ -157,8 +164,12 @@ export default function MovieModal({ params }: { params: { id: string } }) {
         {/* prev next buttons if it's series */}
         {videoType === 'series' &&
           <div className="flex justify-between mt-4 sm:px-0 px-4">
-            <CustomButton label="Previous" to="#" className="py-[0.6rem] px-[1.5rem] rounded-[12px] sm:text-[24px] text-[12px]" />
-            <CustomButton label="Next" to="#" className="py-[0.6rem] px-[1.5rem] rounded-[12px] sm:text-[24px] text-[12px]" />
+            <CustomButton to="#" className="py-[0.6rem] px-[1.5rem] rounded-[12px] sm:text-[24px] text-[12px]">
+            Previous
+            </CustomButton>
+            <CustomButton to="#" className="py-[0.6rem] px-[1.5rem] rounded-[12px] sm:text-[24px] text-[12px]">
+            Next
+              </CustomButton>
           </div>
         }
       </div>
@@ -189,9 +200,10 @@ export default function MovieModal({ params }: { params: { id: string } }) {
               <CustomButton
                 key={index}
                 className="rounded-[10px] sm:text-[24px] text-[12px] text-white sm:py-[0.5rem] py-[0.3rem] sm:h-[60px] h-[35px]"
-                label={`Season ${season}`}
                 to="#"
-              />
+              >
+                {`Season ${season}`}
+                </CustomButton>
 
             ))}
           </div>

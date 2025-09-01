@@ -30,10 +30,11 @@ const movies: Movie[] = [
 
 
 export default function CategorySliderNoSlick() {
-  const SLIDE_W = 193; // px
-  const GAP = 0; // px
-  const VISIBLE_SLIDES = 1;
-  const SIDE_PADDING = 300; // left/right padding to avoid fades overlapping content
+    const SLIDE_W = 193; // px
+  const GAP = 20; // px - added gap between slides
+  const VISIBLE_SLIDES = 2; // Show 2 slides at once
+  const SIDE_PADDING = 300; // default desktop
+  const MD_SIDE_PADDING = 150; // medium screen padding
 
   const [index, setIndex] = useState(0);
   const maxIndex = Math.max(0, movies.length - VISIBLE_SLIDES);
@@ -54,13 +55,18 @@ export default function CategorySliderNoSlick() {
     <Box
       sx={{
         width:"100%",
-        height: 351,
+        height: 
+        {
+          xs:173,
+        sm:351,
+      }
+        ,
         position: "relative",
         overflow: "hidden",
         backgroundColor: "#0A0C0F", // dark background behind slider + fades
       }}
     >
-      <Typography sx={{ mb: 2, color: "#fff", fontWeight: "bold", pl: 6, pb:4}}>
+      <Typography sx={{ mb: 2, color: "#fff", fontWeight: "bold", pl: { xs: 2, md: 6 }, pb:4}}>
         
       </Typography>
 
@@ -71,12 +77,15 @@ export default function CategorySliderNoSlick() {
         aria-label="previous"
         sx={{
           position: "absolute",
-          left: 30,
-          top: "50%",
+          left: { xs: -30, sm: 25, md: 30 },
+          top: {
+            xs: 110,
+            sm: "40%",
+            md: "50%"
+          },
           transform: "translateY(-50%)",
           zIndex: 60,
           pointerEvents: "auto",
-          
           opacity: index === 0 ? 0.45 : 1,
         }}
       >
@@ -90,8 +99,12 @@ export default function CategorySliderNoSlick() {
         aria-label="next"
         sx={{
           position: "absolute",
-          right: 45,
-          top: "50%",
+          right: { xs: -9, md: 45 },
+          top: {
+            xs: 110,
+            sm: "40%",
+            md: "50%"
+          },
           transform: "translateY(-50%)",
           zIndex: 60,
           pointerEvents: "auto",
@@ -100,66 +113,63 @@ export default function CategorySliderNoSlick() {
       >
         <Image src="/assets/images/ArrowRight.svg" alt="next" width={119} height={40} />
       </IconButton>
-       {/** left fade  */}
-     <Box
-      sx={{
-       position: "absolute",
-       left: 0,
-       top: 0,               // fade aligned to top of slider viewport (or movie image top)
-       width: SIDE_PADDING,  // same as padding on slider viewport, 180 is good
-       height: 351,          // match movie image height
-       background: 'linear-gradient(to right, #0A0C0F 40%, rgba(11, 13, 16, 0) 100%)',
-       zIndex: 3,
-       pointerEvents: "none",
-       opacity: index === 0 ? 0 : 1,
-       transition: 'opacity 200ms ease',
-       }}
-       />
-
-      {/* Right fade */}
-       <Box
+      {/* Left fade - now behind the button */}
+      <Box
         sx={{
-        position: "absolute",
-        right: 0,
-        top: 0,               // same as left fade
-        width: SIDE_PADDING,  // same width, 180 px
-        height: 351,          // match movie image heigh
-        background: 'linear-gradient(to left, #0A0C0F 40%, rgba(11, 13, 16, 0) 100%)',
-        zIndex: 3,
-        pointerEvents: "none",
-        opacity: index === maxIndex ? 0 : 1,
-        transition: 'opacity 200ms ease',
+          position: "absolute",
+          left: 0,
+          top: 0,
+          width: { xs: 80, sm: 120, md: 150 },
+          height: 351,
+          background: 'linear-gradient(to right, #0A0C0F 0%, rgba(10, 12, 15, 0.8) 50%, transparent 100%)',
+          zIndex: 50,
+          pointerEvents: "none",
         }}
-        />
+      />
+
+      {/* Right fade - now behind the button */}
+      <Box
+        sx={{
+          position: "absolute",
+          right: 0,
+          top: 0,
+          width: { xs: 80, sm: 120, md: 150 },
+          height: 351,
+          background: 'linear-gradient(to left, #0A0C0F 0%, rgba(10, 12, 15, 0.8) 50%, transparent 100%)',
+          zIndex: 50,
+          pointerEvents: "none",
+        }}
+      />
 
       {/* Slider viewport */}
       <Box
         sx={{
-          width: "100%",
+          width: { xs: "100%", sm: "100%", md: "100%" },
           height: 351,
           overflow: "hidden",
-          paddingLeft: `${SIDE_PADDING}px`,
-          paddingRight: `${SIDE_PADDING}px`,
-          boxSizing: "border-box", // important so padding doesn't reduce visible width
+          pl: { xs: 10, sm: "120px", md: `${SIDE_PADDING}px` },
+          pr: { xs: 12, sm: 4, md: `${SIDE_PADDING}px` },
+          boxSizing: "border-box",
+          mx: { xs: "auto", sm: 0, md: 0 },
         }}
       >
         {/* Track */}
         <Box
           sx={{
             display: "flex",
-            gap: `${GAP}px`,
+            gap: { xs: "10px", sm: `${GAP}px` },
             transition: "transform 0.4s ease",
             transform: `translateX(-${index * (SLIDE_W + GAP)}px)`,
             height: "100%",
             alignItems: "stretch",
-            
+            paddingLeft: { xs: 0, sm: 0, md: `${SIDE_PADDING / 2}px` },
           }}
         >
           {movies.map((m, idx) => (
            <Box
             key={idx}
             sx={{
-            minWidth: SLIDE_W,
+            minWidth: { xs: 70, sm: SLIDE_W, md: SLIDE_W },
             flexShrink: 0,
             display: "flex",
             flexDirection: "column",
@@ -170,10 +180,16 @@ export default function CategorySliderNoSlick() {
             {/* The image box with background, fixed height */}
             <Box
             sx={{
-            width:
-              169,
-       
-             height:249,
+            width: {
+              xs: 97,
+              sm: 150,
+              md: 169,
+            },
+            height: {
+              xs: 144,
+              sm: 222,
+              md: 249,
+            },
              position: "relative",
              borderRadius: 0,
              background: "#111",

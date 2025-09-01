@@ -1,157 +1,319 @@
 'use client';
 import React from 'react';
-import { AppBar, Typography, Box} from '@mui/material';
 import { PlatformSelection } from '../custom/CustomPlatform';
 import { CustomSelect } from '../custom/CustomSelect';
+import logo from "@/public/assets/images/logo.svg";
+import profile from "@/public/assets/images/profileIcon.svg";
+import search from "@/public/assets/images/searchIcon.svg"
+import Image from 'next/image';
+import Link from 'next/link';
+import { Menu, MenuItem, Box } from '@mui/material';
 
-
+const navLinks = [
+  { name: "Home", href: "/" },
+  { name: "TV Shows", href: "/tv-shows" },
+  { name: "Movies", href: "/movies" },
+  { name: "Anime", href: "/anime" },
+  { name: "New", href: "/new" },
+  { name: "My List", href: "/my-list" },
+];
 
 const Header = () => {
-    return (
-        <AppBar
-            position="fixed" 
-            elevation={0} 
-            sx={{
-                display: 'flex',
-                  width: "100%",
-                   height: "193px",
-                padding: 'var(--Space-4XL, 3rem) var(--Horizontal-Padding, 6rem)',
-                gap: 'var(--Space-S, 0.5rem) var(--Space-4XL, 3rem)',
-                flexWrap:"wrap",
-                background: 'linear-gradient(360deg, rgba(11, 13, 16, 0) 0%, #15191E 64.34%)'
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [isSearchHovered, setIsSearchHovered] = React.useState(false);
+  const [showPlatformSelection, setShowPlatformSelection] = React.useState(false);
+  const open = Boolean(anchorEl);
 
-            }}
-           >
-             
-                {/* Left Side (Logo or Title) */}
-                <Box sx={{ display: {sx:"none",lg:"flex"}, alignItems: 'center',paddingLeft: ''}}>
-                {/* Logo */}
-                <Box sx={{ width: 150, height: 26, aspectRatio: '75/13', display: 'flex', gap:"2px" }}>
-                <svg width="151" height="26" viewBox="0 0 151 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7.2452 0.517264C7.73617 0.517264 8.16319 0.850358 8.2849 1.32621L10.9935 11.9894C11.5236 14.1266 11.9259 16.1727 12.3013 18.3306H12.4499C12.8067 16.1272 13.2049 14.1948 13.7103 11.9894L16.3178 1.33448C16.4354 0.854496 16.8644 0.515195 17.3595 0.515195H22.6859C23.4203 0.515195 23.9381 1.23931 23.7008 1.93861L15.9464 24.7484C15.7979 25.1849 15.3895 25.4766 14.9315 25.4766H9.2297C8.76967 25.4766 8.36122 25.1828 8.2127 24.7442L0.557332 1.93447C0.322163 1.23725 0.839947 0.517264 1.57227 0.517264H7.2452Z" fill="white"/>
-                <path d="M99.3573 23.6725C99.4316 24.1773 99.1222 24.6594 98.6188 24.8125C97.3378 25.2014 95.4482 25.4952 93.3543 25.4952C85.8331 25.4952 81.0142 20.896 81.0142 13.241C81.0142 6.0764 85.8558 0.504823 94.4002 0.504823C95.902 0.504823 97.4615 0.724127 98.7034 1.0655C99.2336 1.21032 99.5492 1.73789 99.4419 2.25926L98.7529 5.63158C98.6333 6.21709 98.0268 6.56259 97.4306 6.41156C96.7251 6.23157 95.8442 6.10123 94.7468 6.10123C90.9201 6.10123 88.5189 8.95219 88.5416 12.9679C88.5416 17.3706 91.2605 19.8202 94.8128 19.8202C95.8566 19.8202 96.7498 19.7022 97.5379 19.4995C98.1547 19.3402 98.7735 19.7416 98.8643 20.3519L99.3594 23.6725H99.3573Z" fill="white"/>
-                <path d="M118.94 25.4952C118.428 25.4952 117.991 25.1269 117.905 24.62L117.636 23.0663H117.49C115.976 24.9986 113.663 26 110.992 26C106.406 26 103.539 22.5656 103.539 18.5271C103.539 12.1321 109.212 9.22941 116.914 9.22113V8.83838C116.914 7.34877 116.089 5.62329 112.756 5.62743C110.918 5.62743 109.094 6.09914 107.631 6.7674C107.054 7.03222 106.377 6.69913 106.204 6.08673L105.455 3.42818C105.313 2.92543 105.562 2.39993 106.035 2.17856C107.782 1.35927 110.61 0.50067 114.14 0.50067C122.053 0.50067 124.217 5.43709 124.217 10.9507V19.6609C124.217 21.347 124.281 22.9959 124.429 24.3304C124.5 24.9511 124.007 25.491 123.384 25.491H118.942L118.94 25.4952ZM117.129 14.9024C117.129 14.2982 116.621 13.81 116.021 13.8472C113.055 14.0334 110.623 15.043 110.623 17.7719C110.623 19.8781 111.928 20.8174 113.438 20.8174C115.056 20.8174 116.506 19.7602 116.989 18.2168C117.1 17.8464 117.129 17.3975 117.129 16.9713V14.9024Z" fill="white"/>
-                <path d="M128.367 8.43909C128.367 5.8964 128.295 3.66404 128.213 1.64892C128.188 1.03239 128.675 0.521366 129.283 0.521366H133.624C134.172 0.521366 134.63 0.939286 134.69 1.49169L134.94 3.84404H135.084C136.169 2.10408 138.591 0 142.277 0C147.251 0 150.5 3.55232 150.5 10.4418V24.6614C150.5 25.2614 150.019 25.7476 149.427 25.7476H144.144C143.552 25.7476 143.072 25.2614 143.072 24.6614V11.2238C143.072 8.31289 142.123 6.1426 139.581 6.1426C137.762 6.1426 136.6 7.4336 136.085 8.89632C135.891 9.39286 135.792 10.1666 135.792 10.9507V24.6594C135.792 25.2593 135.311 25.7455 134.719 25.7455H129.436C128.844 25.7455 128.363 25.2593 128.363 24.6594V8.43909H128.367Z" fill="white"/>
-                <path d="M64.5666 25.4952C60.5295 25.4952 56.8184 23.6063 54.3842 20.3147C53.5797 19.2264 53.8169 17.6913 54.9123 16.8927C55.3393 16.5823 55.8427 16.4168 56.3708 16.4168C57.1526 16.4168 57.8952 16.7892 58.3594 17.4161C59.855 19.4395 62.12 20.5981 64.5687 20.5981C68.8595 20.5981 72.3499 17.1327 72.3499 12.8707C72.3499 8.60875 68.8595 5.14333 64.5687 5.14333C61.6435 5.14333 58.8895 6.69294 57.3816 9.18805L51.4137 19.0733C49.0207 23.0332 44.6495 25.4911 40.0018 25.4911C32.9921 25.4911 27.2903 19.8285 27.2903 12.8686C27.2903 5.90883 32.99 0.252422 39.9997 0.252422C44.0657 0.252422 47.7789 2.14548 50.1904 5.44332C50.9887 6.53571 50.7432 8.06877 49.6437 8.86116C49.2187 9.16736 48.7195 9.32874 48.1976 9.32874C47.4096 9.32874 46.6628 8.95012 46.2007 8.31911C44.7278 6.30399 42.4669 5.14747 39.9997 5.14747C35.7089 5.14747 32.2185 8.61289 32.2185 12.8748C32.2185 17.1368 35.7089 20.6022 39.9997 20.6022C42.9249 20.6022 45.6788 19.0526 47.1868 16.5575L53.1506 6.67846C55.5456 2.71443 59.9189 0.254491 64.5666 0.254491C71.5763 0.254491 77.2781 5.9171 77.2781 12.8769C77.2781 19.8367 71.5763 25.4993 64.5666 25.4993V25.4952Z" fill="white"/>
-                </svg>
-                </Box>
-                {/* Navigation Links */}
-                 <Box sx={{ display: { xs: 'none', md: 'flex' }, justifyContent: 'center', alignItems: 'center', gap: '48px', flexGrow: 1 ,cursor:"pointer", width:"593px"}}>
-                {['Home', 'TV Shows', 'Movies', 'Anime', 'New', 'My List'].map((item, index) => (
-                <Box key={index} sx={{ display: 'flex', alignItems: 'center',height: 37 }}>
-                <Typography
-                sx={{
-                color: 'hsla(0, 0%, 100%, 1)',
-                fontFamily: 'Cairo, sans-serif',
-                fontSize: 16,
-                fontStyle: 'normal',
-                lineHeight: 'normal',
-                padding: '0 10px', // Optional padding
-                }}
-               >
-                {item}
-          </Typography>
-        </Box>
-      ))}
-    </Box>
-      
-
-      
-      
-     
-     <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: '16px' ,paddingLeft:{
-      sm:"15rem",
-      lg:"0rem"
-     }}}>
-       
-     {/* Right Side Inner Container */}
-     {/**search bar */}
-     
-     <Box
-      sx={{
-      height:39,
-      display: {lg:'flex',xs:"none"},
-      padding: 'var(--Space-XS, 0.25rem) var(--Space-XL, 1.5rem)',
-      justifyContent: 'center',
-      alignItems: 'center',
-      gap: 'var(--Space-M, 0.75rem)',
-      borderRadius: 'var(--Space-XL, 1.5rem)',
-      border: '1px solid var(--Gradients-Outline, rgba(0, 0, 0, 0.20))',
-      background: 'rgba(77, 77, 77, 0.60)',
-      backdropFilter: 'blur(2px)',
-      }}
-      >
-      <Typography sx={{color: 'rgba(255, 255, 255, 0.50)',
-      textAlign: 'center',
-      fontFamily: 'Cairo, sans-serif',
-      fontSize: '1rem',
-      fontStyle: 'normal',
-      fontWeight: 600,
-      lineHeight: 'normal'}}>Search</Typography>
-
-      <Box sx={{ width: '4.5rem', height: '0.9375rem' }} />
-      <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M20.1707 18.0995L15.7786 13.7057C17.0955 11.9897 17.7103 9.83709 17.4983 7.68447C17.2864 5.53186 16.2635 3.54046 14.6372 2.11425C13.0109 0.688038 10.903 -0.0661898 8.74099 0.00456313C6.57902 0.075316 4.52492 0.965752 2.99536 2.49524C1.4658 4.02473 0.57532 6.07874 0.504563 8.24061C0.433807 10.4025 1.18807 12.5103 2.61435 14.1365C4.04062 15.7628 6.03211 16.7856 8.18483 16.9976C10.3375 17.2095 12.4903 16.5947 14.2064 15.2779L18.6021 19.6744C18.7054 19.7776 18.8279 19.8595 18.9628 19.9154C19.0977 19.9712 19.2423 20 19.3883 20C19.5343 20 19.6788 19.9712 19.8137 19.9154C19.9486 19.8595 20.0711 19.7776 20.1744 19.6744C20.2776 19.5712 20.3595 19.4486 20.4154 19.3137C20.4712 19.1789 20.5 19.0343 20.5 18.8883C20.5 18.7423 20.4712 18.5978 20.4154 18.4629C20.3595 18.328 20.2776 18.2055 20.1744 18.1022L20.1707 18.0995ZM2.73829 8.52683C2.73829 7.28306 3.10713 6.06721 3.79816 5.03305C4.4892 3.99888 5.4714 3.19285 6.62055 2.71688C7.76971 2.2409 9.03421 2.11637 10.2541 2.35902C11.4741 2.60167 12.5947 3.2006 13.4742 4.08009C14.3537 4.95957 14.9527 6.0801 15.1953 7.29998C15.438 8.51986 15.3134 9.7843 14.8375 10.9334C14.3615 12.0825 13.5554 13.0647 12.5212 13.7557C11.487 14.4467 10.2711 14.8155 9.02723 14.8155C7.35982 14.8138 5.7612 14.1507 4.58217 12.9717C3.40313 11.7927 2.74 10.1942 2.73829 8.52683Z" fill="white"/>
-      </svg>
-      </Box>
-         {/** profile icon  */}
-        <svg width="39" height="39" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="0.5" y="0.5" width="38" height="38" rx="19" fill="#4D4D4D" fill-opacity="0.6"/>
-                    <rect x="0.5" y="0.5" width="38" height="38" rx="19" stroke="url(#paint0_linear_112_189)"/> 
-                   <path d="M29.3685 27.3279C28.099 25.1337 26.1166 23.4241 23.7405 22.4741C24.9221 21.6014 25.7949 20.3847 26.2353 18.9964C26.6757 17.6081 26.6613 16.1184 26.1943 14.7386C25.7272 13.3587 24.8311 12.1586 23.6329 11.3081C22.4346 10.4576 20.9951 10 19.518 10C18.041 10 16.6014 10.4576 15.4032 11.3081C14.205 12.1586 13.3089 13.3587 12.8418 14.7386C12.3747 16.1184 12.3604 17.6081 12.8008 18.9964C13.2412 20.3847 14.114 21.6014 15.2956 22.4741C12.9195 23.4241 10.9371 25.1337 9.66759 27.3279C9.58893 27.4525 9.53649 27.5913 9.51342 27.7362C9.49034 27.8812 9.49708 28.0292 9.53325 28.1715C9.56942 28.3138 9.63427 28.4474 9.72395 28.5646C9.81363 28.6817 9.92631 28.7799 10.0553 28.8532C10.1843 28.9266 10.3269 28.9737 10.4747 28.9917C10.6226 29.0097 10.7726 28.9983 10.9158 28.9581C11.0591 28.9179 11.1926 28.8497 11.3086 28.7576C11.4246 28.6655 11.5205 28.5515 11.5908 28.4221C13.2687 25.5662 16.2318 23.8629 19.518 23.8629C22.8043 23.8629 25.7674 25.5671 27.4453 28.4221C27.5976 28.6633 27.8392 28.8368 28.119 28.9057C28.3989 28.9747 28.6949 28.9338 28.9447 28.7917C29.1945 28.6496 29.3783 28.4174 29.4574 28.1443C29.5365 27.8711 29.5046 27.5783 29.3685 27.3279ZM14.703 16.9328C14.703 15.995 14.9854 15.0783 15.5145 14.2985C16.0436 13.5187 16.7956 12.911 17.6754 12.5521C18.5552 12.1932 19.5234 12.0993 20.4574 12.2823C21.3914 12.4652 22.2494 12.9168 22.9228 13.58C23.5962 14.2431 24.0548 15.088 24.2406 16.0078C24.4264 16.9275 24.331 17.8809 23.9666 18.7473C23.6021 19.6138 22.985 20.3543 22.1931 20.8753C21.4013 21.3963 20.4704 21.6744 19.518 21.6744C18.2415 21.673 17.0176 21.173 16.1149 20.284C15.2122 19.3951 14.7045 18.1899 14.703 16.9328Z" fill="white"/>
-                  <defs>
-                <linearGradient id="paint0_linear_112_189" x1="19.5" y1="39" x2="19.5" y2="0" gradientUnits="userSpaceOnUse">
-               <stop stop-opacity="0.2"/>
-              <stop offset="1" stop-color="#666666"/>
-             </linearGradient>
-            </defs>
-        </svg>
-          </Box>
-        </Box>
-
-        
-
-
-        <Box sx={{ display: 'flex', alignSelf:"center",justifyContent: 'center', alignItems: 'center', gap: '12px', flexGrow: 1 ,width:"415px", height:"42px",cursor:"pointer" , paddingLeft:{
-          sm:"10rem",
-          md:"0rem"
-        }}}>
-         <PlatformSelection/>
-        <CustomSelect/>
-        </Box>
-
-       
-         
-        </AppBar>
-    );
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
   };
 
-  export default Header;
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
+  return (
+    <header 
+      className="fixed top-0 left-0 z-50 flex w-full h-[193px] px-24 py-12 gap-2 flex-wrap shadow-none"
+      style={{
+        background: 'linear-gradient(360deg, rgba(11, 13, 16, 0) 0%, #15191E 64.34%)',
+        marginTop: '-8px'
+      }}
+    >
+      {/* Left Side (Logo or Title) */}
+      <div className="hidden lg:flex items-center ">
+        {/* Logo */}
+        <div className="w-[150px] h-[26px] flex gap-0.5" style={{ aspectRatio: '75/13' }}>
+          <Image src={logo} width={150} height={26} alt='logo'/>
+        </div>
+        </div>
+        {/* Navigation Links */}
+        <div className="hidden md:flex justify-center items-center gap-12 flex-grow cursor-pointer w-[593px]">
+        {navLinks.map((link, index) => (
+        <div key={index} className="flex items-center h-[37px] relative group">
+          <Link
+            href={link.href}
+            className="text-white font-normal text-base px-2.5 relative transition-all duration-300 ease-in-out"
+            style={{
+              fontFamily: "Cairo, sans-serif",
+              lineHeight: "normal",
+            }}
+          >
+            <span
+              style={{
+                filter: 'brightness(1)',
+                transition: 'all 0.3s ease',
+                display: 'inline-block',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.filter = 'brightness(0.7)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.filter = 'brightness(1)';
+              }}
+            >
+              {link.name}
+            </span>
+            {/* الخط الأبيض تحت الزر */}
+            <div className="absolute -bottom-2 left-0 w-0 h-0.5 bg-white transition-all duration-300 ease-in-out group-hover:w-full opacity-0 group-hover:opacity-100"></div>
+          </Link>
+        </div>
+      ))}
+        </div>
 
-/**
- *  <header className='header'>
+        <div className="hidden md:flex items-center gap-4 sm:pl-60 lg:pl-0">
+          {/* Right Side Inner Container */}
+          {/**search bar */}
+          <div 
+            className="h-[39px] hidden lg:flex px-6 py-1 justify-center items-center gap-3 rounded-3xl border border-black/20 backdrop-blur-sm transition-all duration-300"
+            style={{
+              background: 'rgba(77, 77, 77, 0.60)'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(35, 45, 60, 0.80)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(77, 77, 77, 0.60)';
+            }}
+          >
+            <input
+              type="text"
+              placeholder="Search..."
+              className="bg-transparent border-none outline-none text-white placeholder-white/50 text-base font-semibold w-32"
+              style={{ 
+                fontFamily: 'Cairo, sans-serif',
+                lineHeight: 'normal'
+              }}
+            />
+            <Image src={search} width={20} height={20} alt='search'/>
+          </div>
+          
+          {/** profile icon */}
+          <Box
+            sx={{
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+            onClick={handleClick}
+          >
+            <Image 
+              src={profile} 
+              width={39} 
+              height={39} 
+              alt='profile'
+              style={{
+                transition: 'all 0.3s ease',
+                filter: 'brightness(1)',
+                cursor: 'pointer',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.filter = 'brightness(0.7)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.filter = 'brightness(1)';
+              }}
+            />
+          </Box>
+          
+          {/* Profile Menu */}
+          <Menu
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            disableScrollLock={true}
+            keepMounted={false}
+            PaperProps={{
+              sx: {
+                mt: '30px',
+                width: '200px',
+                borderRadius: '24px',
+                background: 'rgba(77, 77, 77, 0.6)',
+                position: 'relative',
+                overflow: 'hidden',
+                padding: '1px',
+                backdropFilter: 'blur(5px)',
+                boxSizing: 'border-box',
+                maxHeight: 'none',
+                ml: '-20px',
+                '&::before': {
+                  content: '""',
+                  position: 'absolute',
+                  inset: 0,
+                  borderRadius: '24px',
+                  padding: '1px',
+                  background: 'linear-gradient(0deg, rgba(0, 0, 0, 0.2), #666666)',
+                  WebkitMask:
+                    'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                  WebkitMaskComposite: 'xor',
+                  maskComposite: 'exclude',
+                  pointerEvents: 'none',
+                  zIndex: 1,
+                },
+                '& .MuiMenu-list': {
+                  position: 'relative',
+                  zIndex: 2,
+                  padding: '0',
+                  background: 'rgba(77, 77, 77, 0.6)',
+                  borderRadius: '22px',
+                  boxSizing: 'border-box',
+                  maxHeight: 'none',
+                },
+              },
+            }}
+            sx={{
+              '& .MuiBackdrop-root': {
+                backgroundColor: 'transparent',
+              },
+            }}
+          >
+            {/* Switch Profile */}
+            <MenuItem onClick={handleClose} sx={{ 
+              color: 'white', 
+              fontFamily: 'Cairo', 
+              fontSize: '14px', 
+              py: 2,
+              px: 3,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 2,
+              borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
+            }}>
+              <Box sx={{ width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M8 8C10.21 8 12 6.21 12 4C12 1.79 10.21 0 8 0C5.79 0 4 1.79 4 4C4 6.21 5.79 8 8 8ZM8 10C5.33 10 0 11.34 0 14V16H16V14C16 11.34 10.67 10 8 10Z" fill="white"/>
+                  <path d="M12 6C13.1 6 14 5.1 14 4C14 2.9 13.1 2 12 2C10.9 2 10 2.9 10 4C10 5.1 10.9 6 12 6Z" fill="white"/>
+                </svg>
+              </Box>
+              Switch Profile
+            </MenuItem>
+            
+            {/* Notifications */}
+            <MenuItem onClick={handleClose} sx={{ 
+              color: 'white', 
+              fontFamily: 'Cairo', 
+              fontSize: '14px', 
+              py: 2,
+              px: 3,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 2,
+              borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
+            }}>
+              <Box sx={{ width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M8 16C8.88 16 9.6 15.28 9.6 14.4H6.4C6.4 15.28 7.12 16 8 16ZM12.8 10.4V6.4C12.8 3.52 10.48 1.2 7.6 1.2C4.72 1.2 2.4 3.52 2.4 6.4V10.4L0.8 12V13.6H15.2V12L12.8 10.4Z" fill="white"/>
+                </svg>
+              </Box>
+              Notifications
+            </MenuItem>
+            
+            {/* History */}
+            <MenuItem onClick={handleClose} sx={{ 
+              color: 'white', 
+              fontFamily: 'Cairo', 
+              fontSize: '14px', 
+              py: 2,
+              px: 3,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 2,
+              borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
+            }}>
+              <Box sx={{ width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M8 0C3.58 0 0 3.58 0 8C0 12.42 3.58 16 8 16C12.42 16 16 12.42 16 8C16 3.58 12.42 0 8 0ZM8 14C4.69 14 2 11.31 2 8C2 4.69 4.69 2 8 2C11.31 2 14 4.69 14 8C14 11.31 11.31 14 8 14ZM8.5 4H7V9L10.5 11.5L11.5 10.5L8.5 8.5V4Z" fill="white"/>
+                </svg>
+              </Box>
+              History
+            </MenuItem>
+            
+            {/* Settings */}
+            <MenuItem onClick={handleClose} sx={{ 
+              color: 'white', 
+              fontFamily: 'Cairo', 
+              fontSize: '14px', 
+              py: 2,
+              px: 3,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 2,
+              borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
+            }}>
+              <Box sx={{ width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M8 0C3.58 0 0 3.58 0 8C0 12.42 3.58 16 8 16C12.42 16 16 12.42 16 8C16 3.58 12.42 0 8 0ZM8 12C6.9 12 6 11.1 6 10C6 8.9 6.9 8 8 8C9.1 8 10 8.9 10 10C10 11.1 9.1 12 8 12ZM8 6C6.9 6 6 5.1 6 4C6 2.9 6.9 2 8 2C9.1 2 10 2.9 10 4C10 5.1 9.1 6 8 6Z" fill="white"/>
+                </svg>
+              </Box>
+              Settings
+            </MenuItem>
+            
+            {/* Log Out */}
+            <MenuItem onClick={handleClose} sx={{ 
+              color: 'white', 
+              fontFamily: 'Cairo', 
+              fontSize: '14px', 
+              py: 2,
+              px: 3,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 2
+            }}>
+              <Box sx={{ width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M3 3C3 1.34 4.34 0 6 0H10C11.66 0 13 1.34 13 3V13C13 14.66 11.66 16 10 16H6C4.34 16 3 14.66 3 13V3ZM11.5 8.5L14.5 11.5L16 10L13 7H7V9H13L16 6L14.5 4.5L11.5 7.5V8.5Z" fill="white"/>
+                </svg>
+              </Box>
+              Log Out
+            </MenuItem>
+          </Menu>
+        </div>
+      
 
-    <div className='logo flex justify-start self-start justify-items-start' >
-     <svg width="151" height="26" viewBox="0 0 151 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M7.2452 0.517264C7.73617 0.517264 8.16319 0.850358 8.2849 1.32621L10.9935 11.9894C11.5236 14.1266 11.9259 16.1727 12.3013 18.3306H12.4499C12.8067 16.1272 13.2049 14.1948 13.7103 11.9894L16.3178 1.33448C16.4354 0.854496 16.8644 0.515195 17.3595 0.515195H22.6859C23.4203 0.515195 23.9381 1.23931 23.7008 1.93861L15.9464 24.7484C15.7979 25.1849 15.3895 25.4766 14.9315 25.4766H9.2297C8.76967 25.4766 8.36122 25.1828 8.2127 24.7442L0.557332 1.93447C0.322163 1.23725 0.839947 0.517264 1.57227 0.517264H7.2452Z" fill="white"/>
-<path d="M99.3573 23.6725C99.4316 24.1773 99.1222 24.6594 98.6188 24.8125C97.3378 25.2014 95.4482 25.4952 93.3543 25.4952C85.8331 25.4952 81.0142 20.896 81.0142 13.241C81.0142 6.0764 85.8558 0.504823 94.4002 0.504823C95.902 0.504823 97.4615 0.724127 98.7034 1.0655C99.2336 1.21032 99.5492 1.73789 99.4419 2.25926L98.7529 5.63158C98.6333 6.21709 98.0268 6.56259 97.4306 6.41156C96.7251 6.23157 95.8442 6.10123 94.7468 6.10123C90.9201 6.10123 88.5189 8.95219 88.5416 12.9679C88.5416 17.3706 91.2605 19.8202 94.8128 19.8202C95.8566 19.8202 96.7498 19.7022 97.5379 19.4995C98.1547 19.3402 98.7735 19.7416 98.8643 20.3519L99.3594 23.6725H99.3573Z" fill="white"/>
-<path d="M118.94 25.4952C118.428 25.4952 117.991 25.1269 117.905 24.62L117.636 23.0663H117.49C115.976 24.9986 113.663 26 110.992 26C106.406 26 103.539 22.5656 103.539 18.5271C103.539 12.1321 109.212 9.22941 116.914 9.22113V8.83838C116.914 7.34877 116.089 5.62329 112.756 5.62743C110.918 5.62743 109.094 6.09914 107.631 6.7674C107.054 7.03222 106.377 6.69913 106.204 6.08673L105.455 3.42818C105.313 2.92543 105.562 2.39993 106.035 2.17856C107.782 1.35927 110.61 0.50067 114.14 0.50067C122.053 0.50067 124.217 5.43709 124.217 10.9507V19.6609C124.217 21.347 124.281 22.9959 124.429 24.3304C124.5 24.9511 124.007 25.491 123.384 25.491H118.942L118.94 25.4952ZM117.129 14.9024C117.129 14.2982 116.621 13.81 116.021 13.8472C113.055 14.0334 110.623 15.043 110.623 17.7719C110.623 19.8781 111.928 20.8174 113.438 20.8174C115.056 20.8174 116.506 19.7602 116.989 18.2168C117.1 17.8464 117.129 17.3975 117.129 16.9713V14.9024Z" fill="white"/>
-<path d="M128.367 8.43909C128.367 5.8964 128.295 3.66404 128.213 1.64892C128.188 1.03239 128.675 0.521366 129.283 0.521366H133.624C134.172 0.521366 134.63 0.939286 134.69 1.49169L134.94 3.84404H135.084C136.169 2.10408 138.591 0 142.277 0C147.251 0 150.5 3.55232 150.5 10.4418V24.6614C150.5 25.2614 150.019 25.7476 149.427 25.7476H144.144C143.552 25.7476 143.072 25.2614 143.072 24.6614V11.2238C143.072 8.31289 142.123 6.1426 139.581 6.1426C137.762 6.1426 136.6 7.4336 136.085 8.89632C135.891 9.39286 135.792 10.1666 135.792 10.9507V24.6594C135.792 25.2593 135.311 25.7455 134.719 25.7455H129.436C128.844 25.7455 128.363 25.2593 128.363 24.6594V8.43909H128.367Z" fill="white"/>
-<path d="M64.5666 25.4952C60.5295 25.4952 56.8184 23.6063 54.3842 20.3147C53.5797 19.2264 53.8169 17.6913 54.9123 16.8927C55.3393 16.5823 55.8427 16.4168 56.3708 16.4168C57.1526 16.4168 57.8952 16.7892 58.3594 17.4161C59.855 19.4395 62.12 20.5981 64.5687 20.5981C68.8595 20.5981 72.3499 17.1327 72.3499 12.8707C72.3499 8.60875 68.8595 5.14333 64.5687 5.14333C61.6435 5.14333 58.8895 6.69294 57.3816 9.18805L51.4137 19.0733C49.0207 23.0332 44.6495 25.4911 40.0018 25.4911C32.9921 25.4911 27.2903 19.8285 27.2903 12.8686C27.2903 5.90883 32.99 0.252422 39.9997 0.252422C44.0657 0.252422 47.7789 2.14548 50.1904 5.44332C50.9887 6.53571 50.7432 8.06877 49.6437 8.86116C49.2187 9.16736 48.7195 9.32874 48.1976 9.32874C47.4096 9.32874 46.6628 8.95012 46.2007 8.31911C44.7278 6.30399 42.4669 5.14747 39.9997 5.14747C35.7089 5.14747 32.2185 8.61289 32.2185 12.8748C32.2185 17.1368 35.7089 20.6022 39.9997 20.6022C42.9249 20.6022 45.6788 19.0526 47.1868 16.5575L53.1506 6.67846C55.5456 2.71443 59.9189 0.254491 64.5666 0.254491C71.5763 0.254491 77.2781 5.9171 77.2781 12.8769C77.2781 19.8367 71.5763 25.4993 64.5666 25.4993V25.4952Z" fill="white"/>
-</svg>
+      <div className="flex self-center justify-center items-center gap-3 flex-grow w-[415px] h-[42px] sm:pl-40 md:pl-0" style={{ marginTop: '16px' }}>
+        <div>
+          <PlatformSelection onStateChange={setShowPlatformSelection} />
+        </div>
+        <div
+          style={{
+            transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+            filter: 'brightness(1)',
+            cursor: 'pointer',
+            transform: showPlatformSelection ? 'translateX(154.5px)' : 'translateX(0px)',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.filter = 'brightness(0.7)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.filter = 'brightness(1)';
+          }}
+        >
+          <CustomSelect/>
+        </div>
+      </div>
+    </header>
+  );
+};
 
-    </div>
-
-
-
-    
-
-
-
-</header>
-
-
-
-
- */
+export default Header;

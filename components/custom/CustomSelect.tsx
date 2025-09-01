@@ -11,13 +11,19 @@ export const CustomSelect = () => {
   return (
   <Box
   sx={{
-    width: '94px',
-    height: '42px',
+    width: {
+      xs:"50px",
+      sm:"94px"
+    },
+    height: {
+      xs:"22px",
+      sm:"42px"
+    },
     borderRadius: '24px',
-    paddingTop: '4px',
-    paddingBottom: '4px',
-    paddingLeft: '32px',
-    paddingRight: '32px',
+    paddingTop: '2px',
+    paddingBottom: '2px',
+    paddingLeft: '20px',
+    paddingRight: '20px',
     backgroundColor: 'hsla(0, 0%, 30%, 0.6)',
     position: 'relative',
     display: 'flex',
@@ -56,7 +62,10 @@ export const CustomSelect = () => {
   sx={{
     pt: "3px",
     fontFamily: "Cairo, SemiBold",
-    fontSize: "16px",
+    fontSize: {
+      xs: "9px",   // Small devices
+      sm: "16px"   // Medium devices
+    },
     fontWeight: 600,
     color: 'hsla(0, 0%, 100%, 1)',
     '& .MuiSelect-select': {
@@ -87,7 +96,10 @@ export const CustomSelect = () => {
        
         fontFamily: 'Cairo',
         fontStyle: 'normal',
-        fontSize: '12px',
+        fontSize: {
+          xs: '9px',
+          sm: '12px'
+        },
         color: 'hsla(0, 0%, 100%, 1)',
         lineHeight: '100%',
         letterSpacing: '0%',
