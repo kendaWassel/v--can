@@ -12,13 +12,18 @@ export default function MovieModal({ params }: { params: { id: string } }) {
   const [loading, setLoading] = useState(true);
   const videoRef = useRef(null);
   const [isClosing, setIsClosing] = useState(false);
+  const [isVisible, setIsVisible] = useState(true); 
+  const headerRef = useRef<HTMLElement | null>(null);
+  headerRef.current = document.querySelector("header");
 
   // handle close with animation
   const handleClose = () => {
     setIsClosing(true);
+    if (headerRef.current) headerRef.current.style.display = "flex"; 
     setTimeout(() => {
+      setIsVisible(false);
       router.back();
-    }, 300); // نفس مدة الـanimation
+    }, 300); 
   };
 
   const handleLoadedData = () => {
@@ -76,21 +81,19 @@ export default function MovieModal({ params }: { params: { id: string } }) {
   ];
 
   useEffect(() => {
+    if (headerRef.current) headerRef.current.style.display = "none";  
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "auto";
     };
   }, []);
-  useEffect(() => {
-    const header = document.querySelector("header");
-    if (header) header.style.display = "none";  
-    return () => {
-      if (header) header.style.display = "flex"; 
-    };
-  }, []);
 
+  if (!isVisible) return null;
+  
   return (
-    <div className={`${isClosing ? styles.closing : styles.opening} main font-cairo fixed inset-0 z-[60] overflow-y-auto w-full h-full bg-[#2a2a2a]`}>
+    <>
+    {isVisible && ( 
+    <div className={`${isClosing ? styles.closing : styles.opening} font-cairo fixed inset-0 z-[60] overflow-y-auto w-full h-full bg-[#2a2a2a]`}>
       {/* background image  */}
       <div className={`${styles.imageContainer} absolute`}>
         <img className={`${styles.backgroundImage} blur-md opacity-30`} src="/assets/images/HeroImageContainer.svg" alt="" />
@@ -233,6 +236,8 @@ export default function MovieModal({ params }: { params: { id: string } }) {
       </div>
 
     </div>
+    )}
+    </>
   );
 }
 function Divider() {
