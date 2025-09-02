@@ -10,11 +10,8 @@ import TabletHeader from '@/components/TabAndMobHeader/tabletHeader';
 import show from "@/public/assets/images/showDetails.svg";
 import history from "@/public/assets/images/1917.svg"
 import Image from 'next/image';
-// import PopUp from '../@modal/movie/[id]/page'
 export default function HomePage() {
   return (
-    <>
-    {/* <PopUp/> */}
     <div className="min-h-screen bg-[#0A0C0F] overflow-x-hidden">
       {/* Header Section - Fixed at top */}
       <section className="fixed top-0 left-0 w-full z-[9999] overflow-x-hidden">
@@ -99,7 +96,7 @@ export default function HomePage() {
             <span className="w-[8px] sm:w-[10px] h-[8px] sm:h-[10px] rounded-full bg-[#D9D9D9] inline-block"></span>
 
             {/* Rating */}
-            <span className="w-[70px] sm:w-[88px] h-[25px] sm:h-[30px] text-[#056700] inline-block">8.2/10 IMDb</span>
+            <span className="w-[70px] sm:w-[88px] h-[25px] sm:h-[30px] text-[#0b9b04] font-bold inline-block">8.2/10 IMDb</span>
           </div>
 
           {/* Movie Description */}
@@ -161,7 +158,6 @@ export default function HomePage() {
       
       <Footer/>
     </div>
-    </>
   );
 }
 

@@ -11,6 +11,16 @@ export default function MovieModal({ params }: { params: { id: string } }) {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const videoRef = useRef(null);
+  const [isClosing, setIsClosing] = useState(false);
+
+  // handle close with animation
+  const handleClose = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      router.back();
+    }, 300); // نفس مدة الـanimation
+  };
+
   const handleLoadedData = () => {
     setLoading(false)
   }
@@ -73,14 +83,14 @@ export default function MovieModal({ params }: { params: { id: string } }) {
   }, []);
   useEffect(() => {
     const header = document.querySelector("header");
-    if (header) header.style.display = "none";   // hide header
+    if (header) header.style.display = "none";  
     return () => {
-      if (header) header.style.display = "flex"; // restore header
+      if (header) header.style.display = "flex"; 
     };
   }, []);
 
   return (
-    <div className={`${styles.mainContainer} font-cairo fixed inset-0 z-[60] overflow-y-auto w-full h-full bg-[#2a2a2a]`}>
+    <div className={`${isClosing ? styles.closing : styles.opening} main font-cairo fixed inset-0 z-[60] overflow-y-auto w-full h-full bg-[#2a2a2a]`}>
       {/* background image  */}
       <div className={`${styles.imageContainer} absolute`}>
         <img className={`${styles.backgroundImage} blur-md opacity-30`} src="/assets/images/HeroImageContainer.svg" alt="" />
@@ -89,7 +99,7 @@ export default function MovieModal({ params }: { params: { id: string } }) {
       {/* close button  */}
       <button
         className={`${styles.closeButton} relative mb-[2rem] top-[1.5rem] sm:left-[calc(100%-6rem)] left-[calc(100%-4rem)] text-white sm:text-xl text-sm font-bold z-[60] sm:w-[70px] sm:h-[50px] w-[40px] h-[30px] rounded-[48px] bg-[#33333399] border-[2px] border-[#ffffff42]`}
-        onClick={() => router.back()}
+        onClick={handleClose}
       >
         ✕
       </button>
