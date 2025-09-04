@@ -10,8 +10,8 @@ export const customMenuProps = {
         sm: '20px'
       },
       width: {
-        xs: '90px',
-        sm: '168px'
+        xs: '120px',
+        sm: '200px'
       },
       borderRadius: '24px',
       background: 'rgba(77, 77, 77, 0.6)',

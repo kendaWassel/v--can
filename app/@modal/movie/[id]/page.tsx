@@ -19,7 +19,6 @@ export default function MovieModal({ params }: { params: { id: string } }) {
   // handle close with animation
   const handleClose = () => {
     setIsClosing(true);
-    if (headerRef.current) headerRef.current.style.display = "flex"; 
     setTimeout(() => {
       setIsVisible(false);
       router.back();
@@ -81,10 +80,9 @@ export default function MovieModal({ params }: { params: { id: string } }) {
   ];
 
   useEffect(() => {
-    if (headerRef.current) headerRef.current.style.display = "none";  
-    document.body.style.overflow = "hidden";
+    // لا نقوم بإخفاء شريط التمرير للصفحة الرئيسية
     return () => {
-      document.body.style.overflow = "auto";
+      // لا نحتاج لإعادة تعيين overflow
     };
   }, []);
 
@@ -93,7 +91,7 @@ export default function MovieModal({ params }: { params: { id: string } }) {
   return (
     <>
     {isVisible && ( 
-    <div className={`${isClosing ? styles.closing : styles.opening} font-cairo fixed inset-0 z-[60] overflow-y-auto w-full h-full bg-[#2a2a2a]`}>
+            <div className={`${isClosing ? styles.closing : styles.opening} font-cairo fixed inset-0 z-[9999] overflow-y-auto w-full h-full bg-[#2a2a2a] ${styles.noScrollbar}`}>
       {/* background image  */}
       <div className={`${styles.imageContainer} absolute`}>
         <img className={`${styles.backgroundImage} blur-md opacity-30`} src="/assets/images/HeroImageContainer.svg" alt="" />
@@ -101,7 +99,7 @@ export default function MovieModal({ params }: { params: { id: string } }) {
 
       {/* close button  */}
       <button
-        className={`${styles.closeButton} relative mb-[2rem] top-[1.5rem] sm:left-[calc(100%-6rem)] left-[calc(100%-4rem)] text-white sm:text-xl text-sm font-bold z-[60] sm:w-[70px] sm:h-[50px] w-[40px] h-[30px] rounded-[48px] bg-[#33333399] border-[2px] border-[#ffffff42]`}
+        className={`${styles.closeButton} relative mb-[2rem] top-[1.5rem] sm:left-[calc(100%-6rem)] left-[calc(100%-4rem)] text-white sm:text-xl text-sm font-bold z-[10000] sm:w-[70px] sm:h-[50px] w-[40px] h-[30px] rounded-[48px] bg-[#33333399] border-[2px] border-[#ffffff42]`}
         onClick={handleClose}
       >
         ✕
@@ -147,7 +145,7 @@ export default function MovieModal({ params }: { params: { id: string } }) {
       {/* video player  */}
       <div className="lg:w-[60rem] sm:w-[80%] mt-[5rem] mx-auto relative">
         {loading && (
-          <div className="absolute inset-0 text-center bg-black bg-opacity-70 z-[65]">
+          <div className="absolute inset-0 text-center bg-black bg-opacity-70 z-[10001]">
             <div className={`${styles.loader} w-[fit-content]`}>
               <svg width="151" height="26" viewBox="0 0 151 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M6.76491 0.517694C7.25731 0.517694 7.68557 0.850789 7.80764 1.32664L10.5241 11.9898C11.0558 14.127 11.4593 16.1731 11.8358 18.331H11.9848C12.3427 16.1276 12.742 14.1953 13.2489 11.9898L15.864 1.33491C15.9819 0.854926 16.4122 0.515625 16.9088 0.515625H22.2507C22.9872 0.515625 23.5065 1.23974 23.2686 1.93904L15.4916 24.7488C15.3426 25.1853 14.933 25.477 14.4737 25.477H8.7552C8.29383 25.477 7.88419 25.1833 7.73523 24.7446L0.0574993 1.9349C-0.178356 1.23768 0.34094 0.517694 1.0754 0.517694H6.76491Z" fill="white" />
@@ -228,7 +226,11 @@ export default function MovieModal({ params }: { params: { id: string } }) {
           {recommended.map((item, index) => (
             <div key={index} className="">
                 <Link href={item.href}> {/*to add the source for the film after connecting with api*/}
-                <img src={item.src} alt="poster" className="mx-auto" />
+                <img 
+                  src={item.src} 
+                  alt="poster" 
+                  className={`mx-auto ${styles.borderImageGradient}`} 
+                />
                 </Link>
               </div>
           ))}
