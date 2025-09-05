@@ -10,27 +10,28 @@ import movie3 from '@/public/assets/images/movies/m3.svg';
 import movie4 from '@/public/assets/images/movies/m4.svg';
 import movie5 from '@/public/assets/images/movies/m5.svg';
 import movie6 from '@/public/assets/images/movies/m6.svg';
+import Link from "next/link";
 
 interface Movie {
   src: any;
   watched?: boolean;
   progress?: number;
-  
+
 }
 
 const movies: Movie[] = [
-  { src: movie1, progress: 0.5   }, // half watched
+  { src: movie1, progress: 0.5 }, // half watched
   { src: movie2, watched: true, }, // fully watched
-  { src: movie3, progress: 0.2},
-  { src: movie4 ,  watched: true },
-  {src:movie5 ,  },
-  {src:movie6 , }
+  { src: movie3, progress: 0.2 },
+  { src: movie4, watched: true },
+  { src: movie5, },
+  { src: movie6, }
 ];
 
 
 
 export default function CategorySliderNoSlick() {
-    const SLIDE_W = 193; // px
+  const SLIDE_W = 193; // px
   const GAP = 20; // px - added gap between slides
   const VISIBLE_SLIDES = 2; // Show 2 slides at once
   const SIDE_PADDING = 300; // default desktop
@@ -54,20 +55,20 @@ export default function CategorySliderNoSlick() {
   return (
     <Box
       sx={{
-        width:"100%",
-        height: 
+        width: "100%",
+        height:
         {
-          xs:173,
-        sm:351,
-      }
+          xs: 173,
+          sm: 351,
+        }
         ,
         position: "relative",
         overflow: "hidden",
         backgroundColor: "#0A0C0F", // dark background behind slider + fades
       }}
     >
-      <Typography sx={{ mb: 2, color: "#fff", fontWeight: "bold", pl: { xs: 2, md: 6 }, pb:4}}>
-        
+      <Typography sx={{ mb: 2, color: "#fff", fontWeight: "bold", pl: { xs: 2, md: 6 }, pb: 4 }}>
+
       </Typography>
 
       {/* Left arrow */}
@@ -166,85 +167,87 @@ export default function CategorySliderNoSlick() {
           }}
         >
           {movies.map((m, idx) => (
-           <Box
-            key={idx}
-            sx={{
-            minWidth: { xs: 70, sm: SLIDE_W, md: SLIDE_W },
-            flexShrink: 0,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: 0.5, // space between image box and text
-            }}
-            >
-            {/* The image box with background, fixed height */}
             <Box
-            sx={{
-            width: {
-              xs: 97,
-              sm: 150,
-              md: 169,
-            },
-            height: {
-              xs: 144,
-              sm: 222,
-              md: 249,
-            },
-             position: "relative",
-             borderRadius: 0,
-             background: "#111",
-             border: "1px solid transparent",
-             borderImage: "linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, #666666 100%) 1",
-             backdropFilter: "blur(10px)",
-             WebkitBackdropFilter: "blur(10px)",
-             overflow: "hidden",
-            }}
-             >
-            <Image src={m.src} alt={`movie-${idx}`} fill style={{ objectFit: "cover" }} />
-            {/* watched badge */}
-       {m.watched && (
-        <Box
-          sx={{
-            position: "absolute",
-            top: 2,
-            left: 2,
-            padding: "4px",
-            background: "#0567004D",
-            color: "#fff",
-            fontFamily: "Cairo, sans-serif",
-            fontWeight: 600,
-            fontSize: "16px",
-            lineHeight: "32px",
-            border: "1px solid transparent",
-            borderImage: "linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, #666666 100%) 1",
-            backdropFilter: "blur(10px)",
-            WebkitBackdropFilter: "blur(10px)",
-          }}
-        >
-          Watched
-        </Box>
-      )}
-      {/* progress bar */}
-      {m.progress && !m.watched && (
-        <Box
-          sx={{
-            position: "absolute",
-            bottom: 6,
-            left: 6,
-            width: `${m.progress * 149}px`,
-            height: 11,
-            background: "hsla(189, 94%, 43%, 1)",
-            boxShadow: "0px 4px 6px rgba(0,0,0,0.2)",
-            borderRadius: 1,
-          }}
-        />
-      )}
-    </Box>
+              key={idx}
+              sx={{
+                minWidth: { xs: 70, sm: SLIDE_W, md: SLIDE_W },
+                flexShrink: 0,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 0.5, // space between image box and text
+              }}
+            >
+              {/* The image box with background, fixed height */}
+              <Link href="#">
+              <Box
+                sx={{
+                  width: {
+                    xs: 97,
+                    sm: 150,
+                    md: 169,
+                  },
+                  height: {
+                    xs: 144,
+                    sm: 222,
+                    md: 249,
+                  },
+                  position: "relative",
+                  borderRadius: 0,
+                  background: "#111",
+                  border: "1px solid transparent",
+                  borderImage: "linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, #666666 100%) 1",
+                  backdropFilter: "blur(10px)",
+                  WebkitBackdropFilter: "blur(10px)",
+                  overflow: "hidden",
+                }}
+              >
+                <Image src={m.src} alt={`movie-${idx}`} fill style={{ objectFit: "cover" }} />
+                {/* watched badge */}
+                {m.watched && (
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      top: 2,
+                      left: 2,
+                      padding: "4px",
+                      background: "#0567004D",
+                      color: "#fff",
+                      fontFamily: "Cairo, sans-serif",
+                      fontWeight: 600,
+                      fontSize: "16px",
+                      lineHeight: "32px",
+                      border: "1px solid transparent",
+                      borderImage: "linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, #666666 100%) 1",
+                      backdropFilter: "blur(10px)",
+                      WebkitBackdropFilter: "blur(10px)",
+                    }}
+                  >
+                    Watched
+                  </Box>
+                )}
+                {/* progress bar */}
+                {m.progress && !m.watched && (
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      bottom: 6,
+                      left: 6,
+                      width: `${m.progress * 149}px`,
+                      height: 11,
+                      background: "hsla(189, 94%, 43%, 1)",
+                      boxShadow: "0px 4px 6px rgba(0,0,0,0.2)",
+                      borderRadius: 1,
+                    }}
+                  />
+                )}
+              </Box>
+              </Link>
 
-  
-  </Box>
-))}
-          
+
+            </Box>
+          ))}
+
         </Box>
       </Box>
     </Box>

@@ -48,9 +48,9 @@ const Header = () => {
       {/* Left Side (Logo or Title) */}
       <div className="hidden lg:flex items-center ">
         {/* Logo */}
-        <div className="w-[150px] h-[26px] flex gap-0.5" style={{ aspectRatio: '75/13' }}>
+        <Link href="/" className="w-[150px] h-[26px] flex gap-0.5" style={{ aspectRatio: '75/13' }}>
           <Image src={logo} width={150} height={26} alt='logo'/>
-        </div>
+        </Link>
         </div>
         {/* Navigation Links */}
         <div className="hidden md:flex justify-center items-center gap-12 flex-grow cursor-pointer w-[593px]">

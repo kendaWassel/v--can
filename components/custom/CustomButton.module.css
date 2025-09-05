@@ -15,7 +15,7 @@
     z-index: -1;
 }
 .gradientButton:hover {
-    border: transparent;
+    border: 2px solid transparent;
     box-shadow: 1px -1px 0px #6666;
 }
 .gradientButton:hover::before{
