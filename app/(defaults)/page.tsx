@@ -109,7 +109,7 @@ export default function HomePage() {
           {/* Action Buttons */}
           <div className="flex items-start pt-2 sm:pt-4 gap-2 sm:gap-4">
             <GradientButton />
-            <LoveButton />
+            <LoveButton className='sm:w-[8rem] sm:h-[7.5rem] w-[4rem] h-[5rem]'/>
           </div>
         </div>
         

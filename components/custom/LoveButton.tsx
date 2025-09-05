@@ -27,7 +27,7 @@ const LoveButton: React.FC<LoveButtonProps> = ({
   return (
     <button
       onClick={handleClick}
-      className={`inline-flex -mt-4 items-center justify-center transition-transform duration-200 hover:scale-110 active:scale-95  ${className}`}
+      className={`${className} inline-flex -mt-4 items-center justify-center transition-transform duration-200 hover:scale-110 active:scale-95  ${className}`}
       type="button"
       aria-label={isClicked ? 'Unlike' : 'Like'}
     >
@@ -36,6 +36,7 @@ const LoveButton: React.FC<LoveButtonProps> = ({
         alt={alt}
         width={size}
         height={size}
+        className="w-[100%] h-[100%]"
         priority
       />
     </button>

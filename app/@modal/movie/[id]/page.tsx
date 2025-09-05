@@ -139,7 +139,7 @@ export default function MovieModal({ params }: { params: { id: string } }) {
         </div>
       </div>
       <div className="wish-list relative my-4 mx-auto w-[5rem]">
-        <LoveButton />
+        <LoveButton className=""/>
       </div>
 
       {/* video player  */}
