@@ -239,23 +239,30 @@ export const PlatformSelection: React.FC<PlatformSelectionProps> = ({ onStateCha
           position: 'relative',
           zIndex: showSelection ? 1 : 3,
           opacity: showSelection ? 0 : 1,
+          overflow: showSelection ? 'visible' : 'hidden',
           transform: showSelection ? 'scale(0.8)' : 'scale(1)',
           transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
           filter: 'brightness(1)',
+          
+          '&::after': {
+    content: '""',
+    position: 'absolute',
+    inset: 0,
+    background: 'linear-gradient(162deg, #303740, #30374000)',
+    opacity: 0,
+    transition: '0.3s',
+    zIndex: -1,
+  },
           '&:hover': {
             transform: showSelection ? 'scale(0.8)' : 'scale(1.1)',
-            filter: 'brightness(0.7)',
-          }
-        }}
-        onMouseEnter={(e) => {
-          if (!showSelection) {
-            e.currentTarget.style.filter = 'brightness(0.7)';
-          }
-        }}
-        onMouseLeave={(e) => {
-          if (!showSelection) {
-            e.currentTarget.style.filter = 'brightness(1)';
-          }
+            '&::after': {
+              opacity: 1,
+              zIndex:1,
+            },
+          },
+          '&:active': {
+              opacity: 0.5,
+          },
         }}
       >
         <svg width="100%" height="100%" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">

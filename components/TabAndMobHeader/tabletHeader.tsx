@@ -159,12 +159,6 @@ export default function TabletHeader() {
             cursor: 'pointer',
             transform: showPlatformSelection ? 'translateX(154.5px)' : 'translateX(0px)',
           }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.filter = 'brightness(0.7)';
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.filter = 'brightness(1)';
-          }}
         >
           <CustomSelect/>
         </div>

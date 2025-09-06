@@ -83,7 +83,6 @@ export const CustomSelect = () => {
     transition: 'all 0.3s ease',
     zIndex: 0,
 
-  // Pseudo-element (gradient overlay)
   '&::after': {
     content: '""',
     position: 'absolute',
@@ -94,14 +93,12 @@ export const CustomSelect = () => {
     zIndex: -1,
   },
 
-  // Hover styles
   '&:hover': {
     '&::after': {
       opacity: 1,
     },
   },
 
-  // Active (click) styles
   '&:active': {
     opacity: 0.5,
   },

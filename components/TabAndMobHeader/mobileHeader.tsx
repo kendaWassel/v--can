@@ -169,12 +169,6 @@ export default function MobileHeader() {
             transform: `${showPlatformSelection ? 'translateX(65px)' : 'translateX(0px)'} scale(0.85)`,
             transformOrigin: 'center center',
           }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.filter = 'brightness(0.7)';
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.filter = 'brightness(1)';
-          }}
         >
           <CustomSelect/>
         </div>
