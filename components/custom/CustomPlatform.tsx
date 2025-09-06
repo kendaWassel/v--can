@@ -136,8 +136,8 @@ export const PlatformSelection: React.FC<PlatformSelectionProps> = ({ onStateCha
           <IconButton 
             sx={{ 
               p: 0,
-              transition: 'transform 0.2s ease-in-out',
-              '&:hover': { transform: 'scale(1.1)' }
+              transition: 'transform 0.2s linear',
+              '&:hover': { transform: 'scale(1.1)' , opacity: '0.7'}
             }}
           >
             <Image src={apple} alt="Apple" width={40} height={14} />
@@ -145,8 +145,8 @@ export const PlatformSelection: React.FC<PlatformSelectionProps> = ({ onStateCha
           <IconButton 
             sx={{ 
               p: 0,
-              transition: 'transform 0.2s ease-in-out',
-              '&:hover': { transform: 'scale(1.1)' }
+              transition: 'transform 0.2s linear',
+              '&:hover': { transform: 'scale(1.1)' , opacity: '0.7' }
             }}
           >
             <Image src={des} alt="Disney+" width={40} height={22} />
@@ -154,8 +154,8 @@ export const PlatformSelection: React.FC<PlatformSelectionProps> = ({ onStateCha
           <IconButton 
             sx={{ 
               p: 0,
-              transition: 'transform 0.2s ease-in-out',
-              '&:hover': { transform: 'scale(1.1)' }
+              transition: 'transform 0.2s linear',
+              '&:hover': { transform: 'scale(1.1)' , opacity: '0.7' }
             }}
           >
             <Image src={prime} alt="Amazon Prime" width={33} height={22} />
@@ -163,8 +163,8 @@ export const PlatformSelection: React.FC<PlatformSelectionProps> = ({ onStateCha
           <IconButton 
             sx={{ 
               p: 0,
-              transition: 'transform 0.2s ease-in-out',
-              '&:hover': { transform: 'scale(1.1)' }
+              transition: 'transform 0.2s linear',
+              '&:hover': { transform: 'scale(1.1)' , opacity: '0.7' }
             }}
           >
             <Image src={netflex} alt="Netflix" width={40} height={12} />

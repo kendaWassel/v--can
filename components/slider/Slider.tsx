@@ -58,17 +58,14 @@ export default function CategorySliderNoSlick() {
         height:
         {
           xs: 173,
-          sm: 351,
-        }
-        ,
+          sm: 200,
+        },
+        margin: "1rem 0 ",
         position: "relative",
         overflow: "hidden",
         backgroundColor: "#0A0C0F", // dark background behind slider + fades
       }}
     >
-      <Typography sx={{ mb: 2, color: "#fff", fontWeight: "bold", pl: { xs: 2, md: 6 }, pb: 4 }}>
-
-      </Typography>
 
       {/* Left arrow */}
       <IconButton

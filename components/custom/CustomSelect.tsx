@@ -56,6 +56,7 @@ export const CustomSelect = () => {
   return (
   <Box
   ref={selectRef}
+  className="shadow-[0px_-1px_0px_#666666]"
   onClick={handleToggle} // فتح/إغلاق القائمة عند النقر على المربع
   sx={{
     width: {
@@ -77,14 +78,39 @@ export const CustomSelect = () => {
     alignItems: 'center',
     justifyContent: "center",
     gap: '12px',
-    overflow: 'hidden',  // This is important to clip content
-    cursor: 'pointer', // إضافة cursor pointer
+    overflow: 'hidden',
+    cursor: 'pointer', 
+    transition: 'all 0.3s ease',
+    zIndex: 0,
+
+  // Pseudo-element (gradient overlay)
+  '&::after': {
+    content: '""',
+    position: 'absolute',
+    inset: 0,
+    background: 'linear-gradient(162deg, #303740, #30374000)',
+    opacity: 0,
+    transition: '0.3s',
+    zIndex: -1,
+  },
+
+  // Hover styles
+  '&:hover': {
+    '&::after': {
+      opacity: 1,
+    },
+  },
+
+  // Active (click) styles
+  '&:active': {
+    opacity: 0.5,
+  },
+
     '&::before': {
       content: '""',
       position: 'absolute',
       inset: 0,  // shorthand for top:0; right:0; bottom:0; left:0
       borderRadius: '24px',
-      padding: '1px', // Border thickness
       background: 'linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, #666666 100%)',
       WebkitMask:
         'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
@@ -169,7 +195,6 @@ export const CustomSelect = () => {
         verticalAlign: 'middle',
         gridColumnStart: (index % 2) + 1,  // Left (1) or Right (2)
         gridRowStart: Math.floor(index / 2) + 1,  // Row Number
-        
         // إضافة hover effect لتحسين تجربة المستخدم
         '&:hover': {
           backgroundColor: 'hsla(0, 0%, 100%, 0.1)',

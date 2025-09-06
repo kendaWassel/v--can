@@ -343,12 +343,6 @@ const Header = () => {
             cursor: 'pointer',
             transform: showPlatformSelection ? 'translateX(154.5px)' : 'translateX(0px)',
           }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.filter = 'brightness(0.7)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.filter = 'brightness(1)';
-          }}
         >
           <CustomSelect/>
         </div>
