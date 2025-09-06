@@ -41,14 +41,17 @@ export default function MobileHeader() {
 
   return (
     <div
-      className="flex w-full max-w-[425px] sm:w-[425px] md:w-[768px] items-center h-[120px] sm:h-[140px] md:h-[173px] lg:h-[96px] px-3 sm:px-4 py-2 sm:py-3 flex-wrap cursor-pointer overflow-hidden overflow-y-clip"
+      className="w-full sm:w-[100%] "
       style={{
         background: 'linear-gradient(180deg, #0A0C0E 0%, rgba(10, 12, 14, 0.95) 30%, rgba(10, 12, 14, 0.8) 60%, rgba(10, 12, 14, 0) 100%)'
       }}
     >
      
+     <div className="flex w-full max-w-[425px] sm:w-[425px] md:w-[768px] items-center h-[120px] sm:h-[140px] md:h-[173px] lg:h-[96px] px-3 sm:px-4 py-2 sm:py-3 flex-wrap cursor-pointer overflow-hidden overflow-y-clip mx-auto">
+      
       {/* Logo - Responsive sizing */}
       <div className="flex-grow flex pt-3 sm:pt-4 md:pt-6 justify-start md:hidden pl-[2rem] sm:pl-[3rem] md:pl-[4rem]">
+        <Link href="/">
         <Image 
           src={logo} 
           width={88} 
@@ -56,6 +59,7 @@ export default function MobileHeader() {
           alt='logo'
           className="w-[70px] h-[12px] sm:w-[80px] sm:h-[14px] md:w-[88px] md:h-[15px]"
         />
+        </Link>
       </div>
 
       {/* Right Icons - Responsive spacing */}
@@ -80,7 +84,7 @@ export default function MobileHeader() {
           width={26} 
           height={19} 
           alt='search'
-          className="w-[24px] h-[18px] sm:w-[26px] sm:h-[19px]"
+          className="w-[25px] h-[25px] sm:w-[26px] sm:h-[19px]"
         />
         </div>
         <button
@@ -93,7 +97,7 @@ export default function MobileHeader() {
             width={44} 
             height={32} 
             alt="menu"
-            className="w-[38px] h-[28px] sm:w-[44px] sm:h-[32px]"
+            className="w-[35px] h-[35px] sm:w-[44px] sm:h-[32px]"
           />
         </button>
       </div>
@@ -123,7 +127,7 @@ export default function MobileHeader() {
           }}
         >
           <div 
-            className="h-[20px] sm:h-[22px] md:h-[30px] flex px-3 sm:px-4 py-1 justify-center items-center gap-2 rounded-2xl border border-black/20 backdrop-blur-sm transition-all duration-300"
+            className="h-[28px] sm:h-[35px] md:h-[30px] flex px-3 sm:px-4 py-1 justify-center items-center gap-2 rounded-2xl border border-black/20 backdrop-blur-sm transition-all duration-300"
             style={{
               background: 'rgba(77, 77, 77, 0.60)',
               minWidth: '100px',
@@ -151,7 +155,7 @@ export default function MobileHeader() {
               width={12} 
               height={9} 
               alt='search'
-              className="w-[10px] h-[8px] sm:w-[12px] sm:h-[9px]"
+              className="w-[15px] h-[15px] sm:w-[15px] sm:h-[20px]"
               style={{ filter: 'brightness(0.8)' }}
             />
           </div>
@@ -344,6 +348,9 @@ export default function MobileHeader() {
           </div>
         </div>
       </div>
+
+     </div>
+
     </div>
   );
 }

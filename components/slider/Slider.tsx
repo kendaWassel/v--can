@@ -31,11 +31,10 @@ const movies: Movie[] = [
 
 
 export default function CategorySliderNoSlick() {
-  const SLIDE_W = 193; // px
-  const GAP = 20; // px - added gap between slides
-  const VISIBLE_SLIDES = 2; // Show 2 slides at once
-  const SIDE_PADDING = 300; // default desktop
-  const MD_SIDE_PADDING = 150; // medium screen padding
+  const SLIDE_W = 185; // px
+  const GAP = 5; // px - added gap between slides
+  const VISIBLE_SLIDES = 2 ; // Show 2 slides at once
+  const SIDE_PADDING = 250; // default desktop
 
   const [index, setIndex] = useState(0);
   const maxIndex = Math.max(0, movies.length - VISIBLE_SLIDES);
@@ -78,11 +77,16 @@ export default function CategorySliderNoSlick() {
         aria-label="previous"
         sx={{
           position: "absolute",
-          left: { xs: -30, sm: 25, md: 30 },
+          left: { xs: 0, sm: 25, md: 30 },
           top: {
             xs: 110,
             sm: "40%",
             md: "50%"
+          },
+          width: {
+            xs: "90px",
+            sm:"120px",
+            md: "140px",
           },
           transform: "translateY(-50%)",
           zIndex: 60,
@@ -105,6 +109,11 @@ export default function CategorySliderNoSlick() {
             xs: 110,
             sm: "40%",
             md: "50%"
+          },
+          width: {
+            xs: "90px",
+            sm:"120px",
+            md: "140px",
           },
           transform: "translateY(-50%)",
           zIndex: 60,
@@ -158,19 +167,22 @@ export default function CategorySliderNoSlick() {
         <Box
           sx={{
             display: "flex",
-            gap: { xs: "10px", sm: `${GAP}px` },
+            gap: { xs: `${GAP}px` },
             transition: "transform 0.4s ease",
-            transform: `translateX(-${index * (SLIDE_W + GAP)}px)`,
+            transform: {
+              xs: `translateX(-${index * (97 + GAP)}px)`,
+              sm: `translateX(-${index * (150 + GAP)}px)`,  
+              md: `translateX(-${index * (SLIDE_W + GAP)}px)`,
+            },
             height: "100%",
             alignItems: "stretch",
-            paddingLeft: { xs: 0, sm: 0, md: `${SIDE_PADDING / 2}px` },
           }}
         >
           {movies.map((m, idx) => (
             <Box
               key={idx}
               sx={{
-                minWidth: { xs: 70, sm: SLIDE_W, md: SLIDE_W },
+                minWidth: { xs: 70, sm: `calc(${SLIDE_W}px - 20px)`, md: SLIDE_W },
                 flexShrink: 0,
                 display: "flex",
                 flexDirection: "column",

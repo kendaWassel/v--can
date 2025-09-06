@@ -41,15 +41,19 @@ export default function TabletHeader() {
   return (
     <div
     
-      className="flex w-[768px] items-center  h-[202px] lg:h-[96px] px-4 py-3 flex-wrap cursor-pointer overflow-hidden overflow-y-clip"
+      className="w-[100%]"
             style={{
         background: 'linear-gradient(180deg, #0A0C0E 0%, rgba(10, 12, 14, 0.95) 30%, rgba(10, 12, 14, 0.8) 60%, rgba(10, 12, 14, 0) 100%)'
       }}
     >
      
+     <div className="flex w-[768px] items-center  h-[202px] lg:h-[96px] px-4 py-3 flex-wrap cursor-pointer overflow-hidden overflow-y-clip mx-auto">
+
        {/* Logo on the left */}
       <div className="flex pl-[10rem] pt-6">
+        <Link href="/">
         <Image src={logo} width={120} height={20} alt='logo'/>
+        </Link>
       </div>
 
       {/* Spacer to push right elements to the right */}
@@ -324,6 +328,9 @@ export default function TabletHeader() {
           </div>
         </div>
       </div>
+
+     </div>
+      
     </div>
   );
 }

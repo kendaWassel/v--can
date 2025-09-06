@@ -115,7 +115,7 @@ export default function HomePage() {
         
         {/* Category Label */}
         <div
-          className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 font-cairo font-bold text-lg sm:text-xl md:text-2xl text-[#FFFFFF] px-2 sm:px-4 md:pl-16"
+          className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 font-cairo font-bold sm:text-[24px] text-[12px] text-[#FFFFFF] px-5 sm:px-2 md:pl-16"
           style={{
             zIndex: 10,
           }}
@@ -130,13 +130,13 @@ export default function HomePage() {
         <CategorySlider/>
         
         {/* Second Category */}
-        <div className="font-cairo font-bold text-lg sm:text-xl md:text-2xl text-[#FFFFFF] bg-[#0A0C0F] pl-4 sm:pl-6 md:pl-[5rem] py-4">
+        <div className="font-cairo font-bold sm:text-[24px] text-[12px] text-[#FFFFFF] bg-[#0A0C0F] pl-[2rem] sm:pl-6 md:pl-[5rem] py-4">
           Category (Trend - New - Continue watching)
         </div>
         <CategorySlider/>
         
         {/* Third Category */}
-        <div className="font-cairo font-bold text-lg sm:text-xl md:text-2xl text-[#FFFFFF] bg-[#0A0C0F] pl-4 sm:pl-6 md:pl-[5rem] py-4">
+        <div className="font-cairo font-bold sm:text-[24px] text-[12px] text-[#FFFFFF] bg-[#0A0C0F] pl-[2rem] sm:pl-6 md:pl-[5rem] py-4">
           Category (Trend - New - Continue watching)
         </div>
         <CategorySlider/>

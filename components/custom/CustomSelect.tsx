@@ -67,10 +67,10 @@ export const CustomSelect = () => {
       sm:"42px"
     },
     borderRadius: '24px',
-    paddingTop: '2px',
-    paddingBottom: '2px',
-    paddingLeft: '20px',
-    paddingRight: '20px',
+    padding:{
+      xs: "1rem 2rem",
+      sm: "2px 20px",
+    },
     backgroundColor: 'hsla(0, 0%, 30%, 0.6)',
     position: 'relative',
     display: 'flex',
