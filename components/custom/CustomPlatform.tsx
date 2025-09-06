@@ -239,7 +239,7 @@ export const PlatformSelection: React.FC<PlatformSelectionProps> = ({ onStateCha
           position: 'relative',
           zIndex: showSelection ? 1 : 3,
           opacity: showSelection ? 0 : 1,
-          overflow: showSelection ? 'visible' : 'hidden',
+          overflow: 'hidden',
           transform: showSelection ? 'scale(0.8)' : 'scale(1)',
           transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
           filter: 'brightness(1)',

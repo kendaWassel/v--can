@@ -120,6 +120,32 @@ const Header = () => {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
+              overflow: 'hidden',
+              position: 'relative', 
+              transition: 'all 0.3s ease',
+              zIndex: 0,
+          
+            '&::after': {
+              content: '""',
+              position: 'absolute',
+              inset: 0,
+              borderRadius: '50%',
+              background: 'radial-gradient(#00000000, #00000000, #303740a6, #303740);',
+              opacity: 0,
+              transition: '0.3s',
+              zIndex: -1,
+            },
+          
+            '&:hover': {
+              '&::after': {
+                opacity: 1,
+                zIndex:1,
+              },
+            },
+          
+            '&:active': {
+              opacity: 0.5,
+            },
             }}
             onClick={handleClick}
           >
@@ -132,12 +158,6 @@ const Header = () => {
                 transition: 'all 0.3s ease',
                 filter: 'brightness(1)',
                 cursor: 'pointer',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.filter = 'brightness(0.7)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.filter = 'brightness(1)';
               }}
             />
           </Box>
@@ -154,33 +174,17 @@ const Header = () => {
                 mt: '30px',
                 width: '200px',
                 borderRadius: '24px',
-                background: 'rgba(35, 35, 35, 0.5)',
+                backgroundColor: 'rgb(77 77 77 / 64%);',
                 position: 'relative',
                 overflow: 'hidden',
                 padding: '1px',
-                backdropFilter: 'blur(10px)',
-                boxSizing: 'border-box',
                 maxHeight: 'none',
                 ml: '-20px',
-                '&::before': {
-                  content: '""',
-                  position: 'absolute',
-                  inset: 0,
-                  borderRadius: '24px',
-                  padding: '1px',
-                  background: 'linear-gradient(0deg, rgba(0, 0, 0, 0.2), #222222)',
-                  WebkitMask:
-                    'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                  WebkitMaskComposite: 'xor',
-                  maskComposite: 'exclude',
-                  pointerEvents: 'none',
-                  zIndex: 1,
-                },
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
                 '& .MuiMenu-list': {
                   position: 'relative',
                   zIndex: 2,
                   padding: '0',
-                  background: 'rgba(35, 35, 35, 0.5)',
                   borderRadius: '22px',
                   boxSizing: 'border-box',
                   maxHeight: 'none',
@@ -205,6 +209,7 @@ const Header = () => {
               alignItems: 'center',
               gap: 2,
               position: 'relative',
+              transition: '0.2s linear',
               '&::after': {
                 content: '""',
                 position: 'absolute',
@@ -212,7 +217,26 @@ const Header = () => {
                 left: '20px',
                 right: '20px',
                 height: '1px',
-                background: 'rgba(255, 255, 255, 0.1)',
+                background: 'rgb(255 255 255 / 88%)',
+              },
+              '&::before': {
+                content: '""',
+                position: 'absolute',
+                bottom: '15px',
+                left: '20px',
+                right: '20px',
+                height: '20px',
+                width: '0px',
+                opacity: '0',
+                background: 'rgb(255 255 255 / 88%)',
+                transition: '0.1s linear',
+              },
+              '&:hover': {
+                px: 4,
+                '&::before':{
+                  opacity: '1',
+                  width: '2px',
+                }
               }
             }}>
               <Box sx={{ width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -234,6 +258,7 @@ const Header = () => {
               alignItems: 'center',
               gap: 2,
               position: 'relative',
+              transition: '0.2s linear',
               '&::after': {
                 content: '""',
                 position: 'absolute',
@@ -241,7 +266,26 @@ const Header = () => {
                 left: '20px',
                 right: '20px',
                 height: '1px',
-                background: 'rgba(255, 255, 255, 0.1)',
+                background: 'rgb(255 255 255 / 88%)',
+              },
+              '&::before': {
+                content: '""',
+                position: 'absolute',
+                bottom: '15px',
+                left: '20px',
+                right: '20px',
+                height: '20px',
+                width: '0px',
+                opacity: '0',
+                background: 'rgb(255 255 255 / 88%)',
+                transition: '0.1s linear',
+              },
+              '&:hover': {
+                px: 4,
+                '&::before':{
+                  opacity: '1',
+                  width: '2px',
+                }
               }
             }}>
               <Box sx={{ width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -263,6 +307,7 @@ const Header = () => {
               alignItems: 'center',
               gap: 2,
               position: 'relative',
+              transition: '0.2s linear',
               '&::after': {
                 content: '""',
                 position: 'absolute',
@@ -270,7 +315,26 @@ const Header = () => {
                 left: '20px',
                 right: '20px',
                 height: '1px',
-                background: 'rgba(255, 255, 255, 0.1)',
+                background: 'rgb(255 255 255 / 88%)',
+              },
+              '&::before': {
+                content: '""',
+                position: 'absolute',
+                bottom: '15px',
+                left: '20px',
+                right: '20px',
+                height: '20px',
+                width: '0px',
+                opacity: '0',
+                background: 'rgb(255 255 255 / 88%)',
+                transition: '0.1s linear',
+              },
+              '&:hover': {
+                px: 4,
+                '&::before':{
+                  opacity: '1',
+                  width: '2px',
+                }
               }
             }}>
               <Box sx={{ width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -292,6 +356,7 @@ const Header = () => {
               alignItems: 'center',
               gap: 2,
               position: 'relative',
+              transition: '0.2s linear',
               '&::after': {
                 content: '""',
                 position: 'absolute',
@@ -299,7 +364,26 @@ const Header = () => {
                 left: '20px',
                 right: '20px',
                 height: '1px',
-                background: 'rgba(255, 255, 255, 0.1)',
+                background: 'rgb(255 255 255 / 88%)',
+              },
+              '&::before': {
+                content: '""',
+                position: 'absolute',
+                bottom: '15px',
+                left: '20px',
+                right: '20px',
+                height: '20px',
+                width: '0px',
+                opacity: '0',
+                background: 'rgb(255 255 255 / 88%)',
+                transition: '0.1s linear',
+              },
+              '&:hover': {
+                px: 4,
+                '&::before':{
+                  opacity: '1',
+                  width: '2px',
+                }
               }
             }}>
               <Box sx={{ width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -319,7 +403,28 @@ const Header = () => {
               px: 3,
               display: 'flex',
               alignItems: 'center',
-              gap: 2
+              gap: 2,
+              position: 'relative',
+              transition: '0.2s linear',
+              '&::before': {
+                content: '""',
+                position: 'absolute',
+                bottom: '15px',
+                left: '20px',
+                right: '20px',
+                height: '20px',
+                width: '0px',
+                opacity: '0',
+                background: 'rgb(255 255 255 / 88%)',
+                transition: '0.1s linear',
+              },
+              '&:hover': {
+                px: 4,
+                '&::before':{
+                  opacity: '1',
+                  width: '2px',
+                }
+              }
             }}>
               <Box sx={{ width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <svg width="29" height="28" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg">

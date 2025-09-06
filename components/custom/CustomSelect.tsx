@@ -57,7 +57,7 @@ export const CustomSelect = () => {
   <Box
   ref={selectRef}
   className="shadow-[0px_-1px_0px_#666666]"
-  onClick={handleToggle} // فتح/إغلاق القائمة عند النقر على المربع
+  onClick={handleToggle} 
   sx={{
     width: {
       xs:"50px",
@@ -178,7 +178,6 @@ export const CustomSelect = () => {
         justifyContent: 'center',
         alignItems: 'center',
         cursor: 'pointer',    // إضافة مؤشر النقر
-       
         fontFamily: 'Cairo',
         fontStyle: 'normal',
         fontSize: {
@@ -194,8 +193,10 @@ export const CustomSelect = () => {
         gridRowStart: Math.floor(index / 2) + 1,  // Row Number
         // إضافة hover effect لتحسين تجربة المستخدم
         '&:hover': {
-          backgroundColor: 'hsla(0, 0%, 100%, 0.1)',
-          transition: 'background-color 0.2s ease'
+          borderRadius: '10px',
+          backgroundColor: '#686665',
+          transform: 'scale(1.1)',
+          transition: '0.3s linear'
         }
       }}
     >
