@@ -76,9 +76,8 @@ export default function CategorySliderNoSlick() {
           position: "absolute",
           left: { xs: 0, sm: 25, md: 30 },
           top: {
-            xs: 110,
-            sm: "40%",
-            md: "50%"
+            xs: "40%",
+            sm: "50%",
           },
           width: {
             xs: "90px",
@@ -103,9 +102,8 @@ export default function CategorySliderNoSlick() {
           position: "absolute",
           right: { xs: -9, md: 45 },
           top: {
-            xs: 110,
-            sm: "40%",
-            md: "50%"
+            xs: "40%",
+            sm: "50%",
           },
           width: {
             xs: "90px",
