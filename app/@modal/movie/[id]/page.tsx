@@ -5,7 +5,8 @@ import LoveButton from "@/components/custom/LoveButton"
 import PopUpSlider from '@/components/popUpSlider/PopUpSlider';
 import Link from "next/link";
 import CustomButton from "@/components/custom/CustomButton";
-import styles from './page.module.css'
+import styles from './page.module.css';
+import button from '@/components/custom/CustomButton.module.css';
 
 export default function MovieModal({ params }: { params: { id: string } }) {
   const router = useRouter();
@@ -68,7 +69,7 @@ export default function MovieModal({ params }: { params: { id: string } }) {
   const videoUrl = videoObj.src;
   const videoType = videoObj.type;
 
-  const seasons: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const seasons: number[] = [1, 2, 3, 4, 5, 6, 7];
 
   const recommended = [
     { src: "/assets/images/recommended-1.png", href: "#" },
@@ -77,6 +78,8 @@ export default function MovieModal({ params }: { params: { id: string } }) {
     { src: "/assets/images/recommended-4.png", href: "#" },
     { src: "/assets/images/recommended-5.png", href: "#" },
     { src: "/assets/images/recommended-6.png", href: "#" },
+    { src: "/assets/images/recommended-2.png", href: "#" },
+    { src: "/assets/images/recommended-1.png", href: "#" },
   ];
 
   useEffect(() => {
@@ -185,6 +188,40 @@ export default function MovieModal({ params }: { params: { id: string } }) {
         }
       </div>
 
+      {/* Season Cards */}
+      <div className="my-[5rem] mx-auto lg:w-[60rem] md:w-[40rem] w-[18rem]">
+        <h2 className="text-white font-cairo font-bold text-[12px] sm:text-[24px] mb-8 text-start">
+          {seasons.length} SEASONS
+        </h2>
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8 justify-between">
+          {seasons.map((season, index) => (
+            <div
+              key={index}
+              className={`${button.gradientButton} flex items-center overflow-hidden rounded-[20px]  transition-all duration-300 cursor-pointer transform hover:scale-105 w-[18rem] h-[10rem] gap-[1rem] border-[2px] border-[#ffffff1f]`}
+            >
+              {/* Season Poster */}
+              <div className="relative rounded-[15px] overflow-hidden bg-gradient-to-br from-[#2a2a5a] to-[#1a1a3a] aspect-[3/4] max-w-[11rem]">
+                <img
+                  src={`/assets/images/HeroImageContainer.svg`}
+                  alt={`Season ${season} Poster`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              
+              {/* Season Info */}
+              <div className={`text-center`}>
+                <h3 className="text-white font-cairo font-bold">
+                  Season {season}
+                </h3>
+                <p className="text-white font-cairo font-medium">
+                  8 Episodes
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {videoType === 'series' &&
         <>
           <div className="pt-4">
@@ -206,30 +243,18 @@ export default function MovieModal({ params }: { params: { id: string } }) {
           </div>
         </>
       }
-          <div className={`${styles.noScrollbar} mb-4 sm:w-[20rem] w-[15rem] sm:h-[20rem] h-[10rem] grid grid-cols-2 gap-x-[1.5rem] sm:gap-y-[1.5rem] gap-y-[1rem] mx-auto bg-[#0D0D0D99] py-[1rem] sm:px-[0.8rem] px-[1.5rem] rounded-[30px] overflow-auto`}>
-            {seasons.map((season, index) => (
-              <CustomButton
-                key={index}
-                className="rounded-[10px] sm:text-[24px] text-[12px] text-white sm:py-[0.5rem] py-[0.3rem] sm:h-[60px] h-[35px]"
-                to="#"
-              >
-                {`Season ${season}`}
-                </CustomButton>
-
-            ))}
-          </div>
 
       {/* recommended section  */}
       <div className="my-4">
         <h2 className="font-cairo font-bold py-4 w-[fit-content] sm:ml-[10rem] mx-auto text-[25px] text-white font-bold">Recommended</h2>
-        <div className="mt-4 pb-[5rem] md:w-[50rem] sm:w-[40rem] w-[15rem] mx-auto grid sm:grid-cols-3 grid-cols-2 sm:gap-y-[10rem] sm:gap-x-0 gap-x-[2rem] gap-y-[2rem]">
+        <div className="mt-4 pb-[5rem] md:w-[47rem] sm:w-[40rem] w-[15rem] mx-auto grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 sm:gap-y-[7rem] md:gap-x-[1rem] sm:gap-x-[3rem] gap-x-[2rem] gap-y-[2rem]">
           {recommended.map((item, index) => (
             <div key={index} className="">
                 <Link href={item.href}> {/*to add the source for the film after connecting with api*/}
                 <img 
                   src={item.src} 
                   alt="poster" 
-                  className={`mx-auto ${styles.borderImageGradient}`} 
+                  className={`${styles.borderImageGradient}`} 
                 />
                 </Link>
               </div>
