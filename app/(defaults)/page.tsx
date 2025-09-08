@@ -56,7 +56,7 @@ export default function HomePage() {
         />
         
         {/* Hero Content */}
-        <div className="relative pt-[8rem] sm:pt-[10rem] md:pt-[12rem] lg:pt-[13rem] px-4 sm:px-6 md:px-8 lg:ml-[1.5rem] z-20 flex flex-col h-full text-center text-white items-center lg:items-start">
+        <div className="relative pt-[10rem] sm:pt-[12rem] md:pt-[15rem] lg:pt-[18rem] px-[2rem] sm:px-[3.5rem] md:px-[4rem] lg:ml-[1.5rem] z-20 flex flex-col h-full text-white items-start">
           {/* Movie Poster */}
           <Image 
             src={history} 
@@ -68,39 +68,39 @@ export default function HomePage() {
           
           {/* Movie Info */}
           <div
-            className="flex flex-wrap gap-1 sm:gap-2 md:gap-[17px] pt-4 sm:pt-6 md:pt-8 text-white pb-4 sm:pb-6 md:pb-8 
-            place-content-center lg:place-content-start lg:ml-4 
+            className="flex flex-wrap gap-[5px] sm:gap-2 md:gap-[10px] pt-4 sm:pt-6 md:pt-8 text-white pb-4 sm:pb-[1rem] md:pb-8 
+            justify-start lg:ml-4 
             w-full max-w-[90%] lg:max-w-none
-            text-xs sm:text-sm md:text-sm"
+            text-[10px] sm:text-sm md:text-sm"
             style={{
               fontFamily: "Cairo, sans-serif",
               lineHeight: "100%",
             }}
           >
             {/* Year */}
-            <span className="w-[32px] sm:w-[36px] h-[25px] sm:h-[30px] inline-block">2019</span>
+            <span className="w-[fit-content] sm:w-[36px] h-[25px] sm:h-[30px] inline-block">2019</span>
 
             {/* Dot */}
             <span className="w-[8px] sm:w-[10px] h-[8px] sm:h-[10px] rounded-full bg-[#D9D9D9] inline-block"></span>
 
             {/* Genre */}
-            <span className="w-[140px] sm:w-[160px] md:w-[178px] h-[25px] sm:h-[30px] inline-block">Historical Drama & Action</span>
+            <span className="w-[fit-content] sm:w-[160px] md:w-[178px] h-[25px] sm:h-[30px] inline-block">Historical Drama & Action</span>
 
             {/* Dot */}
             <span className="w-[8px] sm:w-[10px] h-[8px] sm:h-[10px] rounded-full bg-[#D9D9D9] inline-block"></span>
 
             {/* Duration */}
-            <span className="w-[45px] sm:w-[53px] h-[25px] sm:h-[30px] inline-block">1h 59m</span>
+            <span className="w-[fit-content] sm:w-[53px] h-[25px] sm:h-[30px] inline-block">1h 59m</span>
 
             {/* Dot */}
             <span className="w-[8px] sm:w-[10px] h-[8px] sm:h-[10px] rounded-full bg-[#D9D9D9] inline-block"></span>
 
             {/* Rating */}
-            <span className="w-[70px] sm:w-[88px] h-[25px] sm:h-[30px] text-[#0b9b04] font-bold inline-block">8.2/10 IMDb</span>
+            <span className="w-[fit-content] sm:w-[88px] h-[25px] sm:h-[30px] text-[#0b9b04] font-bold inline-block">8.2/10 IMDb</span>
           </div>
 
           {/* Movie Description */}
-          <div className="px-2 sm:px-4 lg:pl-2 place-content-center lg:place-content-start md:pl-0 text-center lg:text-start text-xs sm:text-sm lg:text-base mb-4 sm:mb-6 font-cairo text-[hsla(0, 0%, 100%, 1)] leading-relaxed sm:leading-loose">
+          <div className="lg:pl-2 justify-start md:pl-0 text-start text-xs sm:text-sm lg:text-base my-4 sm:my-6 font-cairo text-[hsla(0, 0%, 100%, 1)] leading-relaxed sm:leading-loose">
             <p className="mb-2 sm:mb-3">April 6th, 1917. As an infantry battalion assembles to wage war deep in enemy territory,</p> 
             <p className="mb-2 sm:mb-3"> two soldiers are assigned to race against time and deliver a message</p>
             <p className="mb-2 sm:mb-3">that will stop 1,6 men from walking straight into a deadly trap.</p>
