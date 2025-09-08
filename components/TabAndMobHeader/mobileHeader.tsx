@@ -50,7 +50,7 @@ export default function MobileHeader() {
      <div className="flex w-full max-w-[425px] sm:w-[425px] md:w-[768px] items-center h-[120px] sm:h-[140px] md:h-[173px] lg:h-[96px] px-3 sm:px-4 py-2 sm:py-3 flex-wrap cursor-pointer overflow-hidden overflow-y-clip mx-auto">
       
       {/* Logo - Responsive sizing */}
-      <div className="flex-grow flex pt-3 sm:pt-4 md:pt-6 justify-start md:hidden pl-[2rem] sm:pl-[3rem] md:pl-[4rem]">
+      <div className="flex-grow flex pt-3 sm:pt-4 md:pt-6 justify-start md:hidden pl-[2rem] sm:pl-[0]">
         <Link href="/">
         <Image 
           src={logo} 
@@ -63,7 +63,7 @@ export default function MobileHeader() {
       </div>
 
       {/* Right Icons - Responsive spacing */}
-      <div className="flex items-center pt-3 sm:pt-4 md:pt-6 gap-2 sm:gap-3 pr-[1.5rem] sm:pr-[2rem] md:pr-[2.5rem]">
+      <div className="flex items-center pt-3 sm:pt-4 md:pt-6 gap-2 sm:gap-3 pr-[2rem] sm:pr-[0]">
         <div
           className="cursor-pointer"
           onClick={() => setShowSearchField(!showSearchField)}

@@ -47,10 +47,10 @@ export default function TabletHeader() {
       }}
     >
      
-     <div className="flex w-[768px] items-center  h-[202px] lg:h-[96px] px-4 py-3 flex-wrap cursor-pointer overflow-hidden overflow-y-clip mx-auto">
+     <div className="flex w-[768px] items-center h-[202px] lg:h-[96px] px-4 py-3 flex-wrap cursor-pointer overflow-hidden overflow-y-clip mx-auto">
 
        {/* Logo on the left */}
-      <div className="flex pl-[10rem] pt-6">
+      <div className="flex pl-[7rem] pt-6">
         <Link href="/">
         <Image src={logo} width={120} height={20} alt='logo'/>
         </Link>
@@ -60,7 +60,7 @@ export default function TabletHeader() {
       <div className="flex-grow"></div>
 
       {/* Right Icons */}
-      <div className="flex pr-[9rem] place-content-center pt-6 gap-3 ">
+      <div className="flex pr-[7rem] place-content-center pt-6 gap-3 ">
         <div
           className="cursor-pointer"
           onClick={() => setShowSearchField(!showSearchField)}

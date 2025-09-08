@@ -39,7 +39,7 @@ const Header = () => {
 
   return (
     <header 
-      className="fixed top-0 left-0 z-50 flex w-full h-[193px] px-24 py-12 gap-2 flex-wrap shadow-none"
+      className="fixed top-0 left-0 z-50 flex w-full h-[193px] pl-[5rem] pr-24 py-12 gap-2 flex-wrap shadow-none"
       style={{
         background: 'linear-gradient(360deg, rgba(11, 13, 16, 0) 0%, #15191E 64.34%)',
         marginTop: '-8px'
