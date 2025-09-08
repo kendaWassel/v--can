@@ -53,7 +53,7 @@ const Header = () => {
         </Link>
         </div>
         {/* Navigation Links */}
-        <div className="hidden md:flex justify-center items-center gap-12 flex-grow cursor-pointer w-[593px]">
+        <div className="hidden md:flex justify-center items-center gap-[2rem] flex-grow cursor-pointer w-[593px]">
         {navLinks.map((link, index) => (
         <div key={index} className="flex items-center h-[37px] relative group">
           <Link
