@@ -80,9 +80,9 @@ export default function CategorySliderNoSlick() {
             sm: "50%",
           },
           width: {
-            xs: "90px",
-            sm:"120px",
-            md: "140px",
+            xs: "110px",
+            sm:"150px",
+            md: "180px",
           },
           transform: "translateY(-50%)",
           zIndex: 60,
@@ -90,7 +90,7 @@ export default function CategorySliderNoSlick() {
           opacity: index === 0 ? 0.45 : 1,
         }}
       >
-        <Image src="/assets/images/ArrowLeft.svg" alt="prev" width={119} height={152} />
+        <Image src="/assets/images/ArrowLeft.svg" alt="prev" width={180} height={152} />
       </IconButton>
 
       {/* Right arrow */}
@@ -106,9 +106,9 @@ export default function CategorySliderNoSlick() {
             sm: "50%",
           },
           width: {
-            xs: "90px",
-            sm:"120px",
-            md: "140px",
+            xs: "110px",
+            sm:"150px",
+            md: "180px",
           },
           transform: "translateY(-50%)",
           zIndex: 60,
@@ -116,7 +116,7 @@ export default function CategorySliderNoSlick() {
           opacity: index === maxIndex ? 0.45 : 1,
         }}
       >
-        <Image src="/assets/images/ArrowRight.svg" alt="next" width={119} height={40} />
+        <Image src="/assets/images/ArrowRight.svg" alt="next" width={180} height={40} />
       </IconButton>
       {/* Left fade - now behind the button */}
       <Box
@@ -260,7 +260,3 @@ export default function CategorySliderNoSlick() {
     </Box>
   );
 }
-/**
- * <Image src="/assets/images/ArrowRight.svg" alt="next" width={40} height={40} />
- * <Image src="/assets/images/ArrowLeft.svg" alt="prev" width={40} height={40} />
- */
