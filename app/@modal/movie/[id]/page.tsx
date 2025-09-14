@@ -1,24 +1,35 @@
 'use client';
+import React from 'react';
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import LoveButton from "@/components/custom/LoveButton"
 import PopUpSlider from '@/components/popUpSlider/PopUpSlider';
 import Link from "next/link";
 import CustomButton from "@/components/custom/CustomButton";
-import styles from './page.module.css';
+import { Box } from '@mui/material';
 import button from '@/components/custom/CustomButton.module.css';
+import styles from './page.module.css';
 
 export default function MovieModal({ params }: { params: { id: string } }) {
   const router = useRouter();
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [loading, setLoading] = useState(true);
   const videoRef = useRef(null);
   const [isClosing, setIsClosing] = useState(false);
   const [isVisible, setIsVisible] = useState(true); 
+  const [selectedSeason, setSelectedSeason] = useState<number>(1);
+  const [open, setOpen] = useState(false);
   const headerRef = useRef<HTMLElement | null>(null);
   headerRef.current = document.querySelector("header");
 
-  // handle close with animation
+  const handleClick = () => {
+    setOpen(!open);
+  };
   const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleClosePage = () => {
     setIsClosing(true);
     setTimeout(() => {
       setIsVisible(false);
@@ -69,7 +80,7 @@ export default function MovieModal({ params }: { params: { id: string } }) {
   const videoUrl = videoObj.src;
   const videoType = videoObj.type;
 
-  const seasons: number[] = [1, 2, 3, 4, 5, 6, 7];
+  const seasons: number[] = [1, 2, 3, 4, 5];
 
   const recommended = [
     { src: "/assets/images/recommended-1.png", href: "#" },
@@ -83,11 +94,21 @@ export default function MovieModal({ params }: { params: { id: string } }) {
   ];
 
   useEffect(() => {
-    // لا نقوم بإخفاء شريط التمرير للصفحة الرئيسية
-    return () => {
-      // لا نحتاج لإعادة تعيين overflow
+    const handleClickOutside = (event: MouseEvent) => {
+      if (open) {
+        const target = event.target as Element;
+        if (!target.closest('.season-selector')) {
+          setOpen(false);
+        }
+      }
     };
-  }, []);
+    if (open) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [open]);
 
   if (!isVisible) return null;
   
@@ -103,7 +124,7 @@ export default function MovieModal({ params }: { params: { id: string } }) {
       {/* close button  */}
       <button
         className={`${styles.closeButton} relative mb-[2rem] top-[1.5rem] sm:left-[calc(100%-6rem)] left-[calc(100%-4rem)] text-white sm:text-xl text-sm font-bold z-[10000] sm:w-[70px] sm:h-[50px] w-[40px] h-[30px] rounded-[48px] bg-[#33333399] border-[2px] border-[#ffffff42]`}
-        onClick={handleClose}
+        onClick={handleClosePage}
       >
         ✕
       </button>
@@ -177,50 +198,50 @@ export default function MovieModal({ params }: { params: { id: string } }) {
       <div className="lg:w-[60rem] sm:w-[80%] mt-[1.5rem] mx-auto">
         {/* prev next buttons if it's series */}
         {videoType === 'series' &&
-          <div className="flex justify-between mt-4 sm:px-0 px-4">
-            <CustomButton to="#" className="py-[0.6rem] px-[1.5rem] rounded-[12px] sm:text-[24px] text-[12px]">
+            <div className="flex justify-between items-start mt-4 sm:px-0 px-4">
+              <CustomButton to="#" className="sm:py-[0.6rem] sm:px-[1.5rem] py-[0.3rem] px-[1rem] rounded-[12px] sm:text-[24px] text-[12px]">
             Previous
             </CustomButton>
-            <CustomButton to="#" className="py-[0.6rem] px-[1.5rem] rounded-[12px] sm:text-[24px] text-[12px]">
+              
+               {/* Season Selector */}
+               <div className="season-selector">
+                 {!open ? (
+                   <button
+                     onClick={handleClick}
+                     className="sm:py-[0.6rem] sm:px-[2rem] py-[0.4rem] px-[1.5rem] rounded-[12px] bg-[#303030] border-[2px] border-[#ffffff29] border-t-0 shadow-[0px_-1px_2px_#6666] text-white font-cairo sm:text-[24px] text-[12px] hover:bg-[#0D0D0D99] transition duration-300"
+                   >
+                     Season {selectedSeason}
+                   </button>
+                 ) : (
+                   <div className="relative transition duration-300">
+                     <div className="flex flex-col border-1 border-[#666666] border-b-0 shadow-[0px_-1px_0px_#666666] rounded-[25px] bg-[#4d4d4d99]">
+                       {seasons.map((seasonNumber, index) => (
+                         <div
+                           key={seasonNumber}
+                           onClick={() => {
+                             setSelectedSeason(seasonNumber);
+                             handleClose();
+                           }}
+                           className={`${styles.season} sm:mx-[1rem] mx-[1rem] pt-[1rem] pb-[0.5rem] sm:px-[3rem] px-[0.5rem] hover:pl-[1rem] text-white font-cairo sm:text-[16px] text-[12px] cursor-pointer ${
+                             index !== seasons.length - 1 ? 'border-b-[2px] border-[rgba(255,255,255)]' : 'pb-[1rem]'
+                           }`}
+                         >
+                           Season {seasonNumber}
+                         </div>
+                       ))}
+                     </div>
+                   </div>
+                 )}
+               </div>
+
+
+              <CustomButton to="#" className="sm:py-[0.6rem] sm:px-[1.5rem] py-[0.3rem] px-[1rem] rounded-[12px] sm:text-[24px] text-[12px]">
             Next
               </CustomButton>
           </div>
         }
       </div>
 
-      {/* Season Cards */}
-      <div className="my-[5rem] mx-auto lg:w-[60rem] md:w-[40rem] w-[18rem]">
-        <h2 className="text-white font-cairo font-bold text-[12px] sm:text-[24px] mb-8 text-start">
-          {seasons.length} SEASONS
-        </h2>
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8 justify-between">
-          {seasons.map((season, index) => (
-            <div
-              key={index}
-              className={`${button.gradientButton} flex items-center overflow-hidden rounded-[20px]  transition-all duration-300 cursor-pointer transform hover:scale-105 w-[18rem] h-[10rem] gap-[1rem] border-[2px] border-[#ffffff1f]`}
-            >
-              {/* Season Poster */}
-              <div className="relative rounded-[15px] overflow-hidden bg-gradient-to-br from-[#2a2a5a] to-[#1a1a3a] aspect-[3/4] max-w-[11rem]">
-                <img
-                  src={`/assets/images/HeroImageContainer.svg`}
-                  alt={`Season ${season} Poster`}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              
-              {/* Season Info */}
-              <div className={`text-center`}>
-                <h3 className="text-white font-cairo font-bold">
-                  Season {season}
-                </h3>
-                <p className="text-white font-cairo font-medium">
-                  8 Episodes
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
 
       {videoType === 'series' &&
         <>
